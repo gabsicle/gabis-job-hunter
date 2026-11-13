@@ -45,6 +45,11 @@ When something needs you (a portal login, a human check, an e-mail to send), it 
 ## Your files (all in your folder, nothing leaves it except what you apply with)
 `Application Tracker.xlsx` (Applications, Summary, Map sweep) · `Applications/YYYY-MM-DD Company - Role (City)/` · `_Playbook/` with your profile, answer bank, rules, hand-off note and the scripts (letters, tracker, folders, packs, form autofill, Easy Apply runner).
 
+## Where your data goes
+- **Stays on your computer:** CV, profile, answer bank, tracker, letters and application folders, all in your Job Search folder.
+- **Sent only where you approve:** your application details and documents go to the employer career sites and hiring portals (Workday, Personio, Greenhouse, SmartRecruiters, …) and, only if you ask for Easy Apply, LinkedIn, for the applications you OK in chat. E-mails go out only with your approval of the exact text.
+- **Nothing else:** no server of the author, no analytics, no tracking. Details: [PRIVACY.md](PRIVACY.md).
+
 ## Tips
 - Start in a fresh chat for each batch; say "continue applying" and it picks up from the hand-off note.
 - Check the first five letters and answers closely; correct anything once and it is saved for next time.
