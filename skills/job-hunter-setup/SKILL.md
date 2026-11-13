@@ -1,6 +1,6 @@
 ---
 name: job-hunter-setup
-description: Sets up Gabis Job Hunter for a new person in one sitting - links their job-search folder, reads their CV, asks one round of questions, and creates their profile, answer bank, rules, tracker and toolkit. Use when the user says "set me up", "start Gabis Job Hunter", "onboard me", "set up my job search", "update my profile", or when another Job Hunter skill finds no profile.
+description: Sets up Gabis Job Hunter for a new person in one sitting - links their job-search folder, reads their CV, asks one round of questions, and creates their profile, answer bank, rules, tracker and working scripts. Use when the user says "set me up", "start Gabis Job Hunter", "onboard me", "set up my job search", "update my profile", or when another Job Hunter skill finds no profile.
 ---
 
 # Job Hunter setup
@@ -16,13 +16,13 @@ Job Search/
   _candidate_profile.md          letter facts and wording rules
   _Playbook/
     profile.json  answer_bank.md  rules.md  handoff.md  runner_config.js
-    scripts/  (copied from this skill's toolkit/scripts)
+    scripts/  (written at setup from references/tools.md)
   CV/                            CVs per language, references, certificates
   Applications/                  one folder per application: YYYY-MM-DD Company - Role (City)
   _Upload/                       files to upload by hand (e.g. to the LinkedIn resume library)
 ```
-3. Copy everything in this skill's `toolkit/scripts/` to `_Playbook/scripts/` (fonts included).
-4. Check the tools the scripts need where this session runs code: Python 3 with `openpyxl` and `pikepdf`; `pdfinfo`/`pdffonts` (poppler); Node with Playwright and Chromium for letter PDFs. Install missing ones only with the user's OK. If letters cannot render on their computer, render them in the cloud workspace and copy the PDFs into the folder.
+3. Write the scripts into `_Playbook/scripts/` from `references/tools.md` (one file per spec) and run each once on dummy data. The plugin ships no code, so re-create a script from the spec whenever one is missing.
+4. Check what the scripts need where this session runs code: Python 3 with `openpyxl` and `pikepdf`; `pdfinfo`/`pdffonts` (poppler); Node with Playwright and Chromium for letter PDFs. Install missing ones only with the user's OK. If letters cannot render on their computer, render them in the cloud workspace and copy the PDFs into the folder.
 
 ## 2. Documents
 Ask the user to put their CV (PDF; one per language they apply in) into `CV/`, plus references or certificates if they have them. Read every CV completely before asking anything.
