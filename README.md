@@ -43,7 +43,7 @@ When something needs you (a portal login, a human check, an e-mail to send), it 
 - **application-inbox** – mailbox sweep that updates the tracker and lists what you need to do.
 
 ## Your files (all in your folder, nothing leaves it except what you apply with)
-`Application Tracker.xlsx` (Applications, Summary, Map sweep) · `Applications/YYYY-MM-DD Company - Role (City)/` · `_Playbook/` with your profile, answer bank, rules, hand-off note and the scripts (letters, tracker, folders, packs, form autofill, Easy Apply runner).
+`Application Tracker.xlsx` (Applications, Summary, Map sweep) · `Applications/YYYY-MM-DD Company - Role (City)/` · `_Playbook/` with your profile, answer bank, rules, hand-off note and small scripts Claude writes for you at setup (letters, tracker, folders, packs, form autofill, Easy Apply runner). The plugin itself contains only instructions and templates, no code.
 
 ## Where your data goes
 - **Stays on your computer:** CV, profile, answer bank, tracker, letters and application folders, all in your Job Search folder.
@@ -55,4 +55,3 @@ When something needs you (a portal login, a human check, an e-mail to send), it 
 - Check the first five letters and answers closely; correct anything once and it is saved for next time.
 - Easy Apply is for volume only. Career-site applications with a tailored letter get far better replies.
 
-Fonts: Roboto (Apache License 2.0), bundled for the letter PDFs.
