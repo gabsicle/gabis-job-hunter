@@ -1,6 +1,6 @@
 {
   "name": "gabis-job-hunter",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Gabis Job Hunter: finds matching roles on company career sites and LinkedIn, writes calm, true one-page cover letters, fills and submits applications after your approval, and keeps a tracker plus one folder per application. Set up once from your CV, then say \"find me jobs\".",
   "author": {
     "name": "gabsicle",
@@ -15,5 +15,9 @@
   ],
   "icon": ".claude-plugin/icon.png",
   "license": "MIT",
-  "repository": "https://github.com/gabsicle/gabis-job-hunter"
+  "repository": "https://github.com/gabsicle/gabis-job-hunter",
+  "homepage": "https://github.com/gabsicle/gabis-job-hunter",
+  "supportUrl": "https://github.com/gabsicle/gabis-job-hunter/issues",
+  "privacyPolicyUrl": "https://github.com/gabsicle/gabis-job-hunter/blob/main/PRIVACY.md",
+  "documentationUrl": "https://github.com/gabsicle/gabis-job-hunter#readme"
 }
