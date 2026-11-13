@@ -1,0 +1,14 @@
+{
+  "name": "gabis-job-hunter",
+  "description": "Gabis Job Hunter - job applications with Claude: career-site search, true one-page cover letters, applications after your OK, tracker and folders.",
+  "owner": {
+    "name": "Gabi"
+  },
+  "plugins": [
+    {
+      "name": "gabis-job-hunter",
+      "source": "./",
+      "description": "Finds matching roles, writes calm, true cover letters, applies after your approval and keeps a tracker plus one folder per application."
+    }
+  ]
+}
