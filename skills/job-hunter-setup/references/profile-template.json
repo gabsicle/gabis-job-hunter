@@ -1,0 +1,74 @@
+{
+  "_about": "Structured candidate data for forms that ask field by field. Source: the user's CV and their setup answers. Titles and dates exactly as on the CV.",
+  "personal": {
+    "first": "",
+    "last": "",
+    "legal_name": "",
+    "email": "",
+    "phone": "+49 ...",
+    "phone_local": "",
+    "street": "",
+    "postcode": "",
+    "city": "",
+    "state": "",
+    "country": "",
+    "linkedin": "https://www.linkedin.com/in/...",
+    "citizenship": [],
+    "date_of_birth_only_if_mandatory": "YYYY-MM-DD",
+    "gender_only_if_mandatory": ""
+  },
+  "standard": {
+    "salary_text": "e.g. 80.000 EUR fix zzgl. variabler Vergütung",
+    "salary_number": 80000,
+    "salary_band": "e.g. 75.001-85.000",
+    "salary_monthly_number": 6700,
+    "salary_monthly_text": "e.g. 6.700 EUR (80.000 EUR p.a. fix zzgl. variabler Vergütung)",
+    "currency": "EUR",
+    "start_date": "YYYY-MM-DD",
+    "start_text": "e.g. Eintritt ab 01.03.2027 möglich / Available from 1 March 2027",
+    "notice": "e.g. 3 months to the end of a month",
+    "current_role_end": "YYYY-MM-DD or empty",
+    "work_without_visa": ["EU/EEA"],
+    "needs_sponsorship": ["UK", "US"],
+    "total_experience_since": "YYYY-MM",
+    "travel": "yes / up to X days a week / ask",
+    "relocation": {"home region": "no move needed", "elsewhere": "ask"},
+    "commute_cities": ["home city", "cities within the commute radius"]
+  },
+  "languages": [
+    {"language": "German", "level": "C2 / native / fluent / B2 ..."},
+    {"language": "English", "level": ""}
+  ],
+  "roles": [
+    {"company": "", "title": "exactly as on CV", "from": "YYYY-MM", "to": "YYYY-MM or present", "city": "", "bullets_ref": "CV section"}
+  ],
+  "education": [
+    {"school": "", "degree": "", "field": "", "from": "YYYY", "to": "YYYY"}
+  ],
+  "easy_apply": {
+    "_about": "Read by runner_config.py. Regexes are JavaScript regex strings, case-insensitive. Only rules backed by the CV or the user's answers.",
+    "resume_file_regex": "Firstname_Lastname_CV\\.pdf",
+    "city": "",
+    "city_option_regex": "Berlin, Berlin",
+    "commute_regex": "berlin|potsdam",
+    "visa_regions_regex": "united kingdom|\\buk\\b|london|united states|\\busa\\b",
+    "need_visa_in_home_market": false,
+    "salary_band_regex": "75[.,]?001.{0,8}85",
+    "start_option_regex": "3 months|drei monate",
+    "travel_answer": "Y",
+    "full_time_answer": "Y",
+    "total_years": 0,
+    "years": [["strateg|corporate development", 0], ["consult|beratung", 0]],
+    "years_unknown_regex": "construction|software|\\bsap\\b|pharma|bank",
+    "yes_regex": "",
+    "no_regex": "",
+    "unknown_regex": "",
+    "language_levels": [["german|deutsch", ["verhandlungssicher", "^c2", "fluent"]], ["english|englisch", ["fluent", "^c1"]]],
+    "languages_yes_regex": "german|deutsch|english|englisch",
+    "languages_no_regex": "french|französisch",
+    "permit_option_regex": "uneingeschränkt|unrestricted|eu citizen",
+    "nationality_option_regex": "",
+    "gender_option_regex": "",
+    "source_answer": "LinkedIn"
+  }
+}
