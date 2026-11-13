@@ -7,7 +7,7 @@ description: Runs the Gabis Job Hunter application loop - finds matching roles o
 
 ## Start (two reads, nothing else up front)
 1. In the user's `Job Search` folder: `_Playbook/handoff.md` (state, focus, open items) and `_Playbook/rules.md` (limits and personal rules). No `_Playbook/` → run the `job-hunter-setup` skill first.
-2. `python3 _Playbook/scripts/sync_folders.py .` from the `Job Search` folder (tracker rows vs application folders).
+2. `python3 _Playbook/scripts/sync_folders.py .` from the `Job Search` folder (tracker rows vs application folders). Any script missing → re-create it from the setup skill's `references/tools.md`.
 
 Read `profile.json`, `answer_bank.md`, `_candidate_profile.md` or a CV only when a step needs a specific fact.
 
