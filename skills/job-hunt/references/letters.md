@@ -8,7 +8,7 @@
 - German postings: "Anschreiben", Sie-Form unless the posting uses du; salary and start date only when the posting asks for them in the letter.
 
 ## Rendering
-`_Playbook/scripts/make_letters.py letters.json <output folder>` renders each letter to PDF with the bundled Roboto fonts.
+`_Playbook/scripts/make_letters.py letters.json <output folder>` renders each letter to PDF (layout in the setup skill's `references/tools.md`).
 ```json
 {"candidate": {"name": "Full Name", "tagline": "Target title line", "contact_line": "City • phone • e-mail • LinkedIn", "accent": "#12233f"},
  "letters": {"AcmeGmbH": {"lang": "de", "recipient_html": "Acme GmbH<br>Personalabteilung<br>Musterstraße 1<br>10115 Berlin",

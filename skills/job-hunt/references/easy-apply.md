@@ -4,7 +4,7 @@ Use only in a browser where LinkedIn is signed in as **the user** (check the nam
 
 ## Run
 1. Résumé: the user uploads their CV once to the LinkedIn résumé library (`linkedin.com/jobs/application-settings`); `easy_apply_runner.js` selects it by the file name in `runner_config.js`.
-2. Open a LinkedIn job page. Paste `_Playbook/runner_config.js`, then `_Playbook/scripts/easy_apply_runner.js` (LinkedIn blocks eval, so paste the code itself). This defines `window.__ea()`.
+2. Open a LinkedIn job page. Paste `_Playbook/runner_config.js`, then `_Playbook/scripts/easy_apply_runner.js` (both written at setup from the spec; LinkedIn blocks eval, so paste the code itself). This defines `window.__ea()`.
 3. Dry run first: `await window.__ea()` with `window.__AUTO` unset fills and stops at the review page ("READY"). With `window.__AUTO=1` it submits only when every question was answered by a rule; anything else is listed as UNKNOWN and nothing is sent.
 4. Move between jobs without reloading (keeps the runner in the page):
    `history.pushState({},'','/jobs/search-results/?currentJobId='+id); dispatchEvent(new PopStateEvent('popstate',{state:{}}))`.
