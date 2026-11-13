@@ -1,6 +1,6 @@
 {
   "name": "gabis-job-hunter",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Gabis Job Hunter: finds matching roles on company career sites and LinkedIn, writes calm, true one-page cover letters, fills and submits applications after your approval, and keeps a tracker plus one folder per application. Set up once from your CV, then say \"find me jobs\".",
   "author": {
     "name": "gabsicle",
