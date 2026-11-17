@@ -1,6 +1,6 @@
 ---
 name: job-hunt
-description: Runs the Gabis Job Hunter application loop - finds matching roles on company career sites (and LinkedIn Easy Apply only when asked), gates them, writes calm one-page cover letters, fills and submits applications after the user's approval, and records each one in the tracker and its own folder. Use when the user says "find me jobs", "apply", "continue applying", "job hunt", "apply to this company or role", "sweep my target companies", or gives a session brief.
+description: Runs the Gabis Job Hunter application loop - finds matching roles on company career sites (and LinkedIn Easy Apply only when asked), gates them, writes calm one-page cover letters, fills and submits applications after the user's approval, and records each one in the tracker and its own folder. Runs the sweep and letter checks with a small agent team (project lead, crawlers, gaters, letter reviewer) on models chosen by a cost-quality frontier. Use when the user says "find me jobs", "apply", "continue applying", "job hunt", "apply to this company or role", "sweep my target companies", or gives a session brief.
 ---
 
 # Job hunt
@@ -28,25 +28,34 @@ Follow `_Playbook/rules.md` exactly. In short: portal accounts only after the us
 - `navigate` on its own before scripting a new site; if a page bounces in one browser, read it in the other.
 - Built-in browser unavailable: discover through `https://html.duckduckgo.com/html/?q=` and career pages in Chrome.
 
+## Team
+The main chat is the client lead: user, approval, letters, forms, submissions, tracker. Fan-out work goes to agents; briefs, labels and fallback are in `references/team.md`.
+- `project-lead` runs find and gate: it staffs `job-crawler` and `posting-gater` agents in parallel and returns one shortlist.
+- `letter-reviewer` checks every letter (and any drafted free-text answer) before the user sees it.
+- Models come from `frontier.py pick`, never from taste; the main chat labels outcomes with `frontier.py label` so the frontier learns.
+- Agent results only: never pull a worker's page text into the main chat.
+- No agents in this environment (no Agent tool, or a dispatch fails twice): run steps 2–3 inline as written below, 15–20 companies per session, and say so once.
+
 ## Loop per session
 1. **Sweep** the mailbox (application-inbox skill) if the last sweep is older than a day.
-2. **Find** - best first:
-   - **Map sweep** (sheet in the tracker, built by target-companies): the next 15–20 companies, oldest "Last checked" first. Open each careers page; also search `html.duckduckgo.com/html/?q=<company> <title words>`; in the user's own LinkedIn browser, the guest search `/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=<company> <title>&location=<country>&f_TPR=r2592000`.
+2. **Find and gate (team):** send `project-lead` the sweep brief from `references/team.md`: the next 15–30 Map sweep companies (sheet in the tracker, built by target-companies), oldest "Last checked" first, plus a title crawl when the user wants new employers or the Map sweep is thin. It returns the shortlist in gater format, "needs browser" roles, drops and the companies with nothing relevant; in step 7, update "Last checked" and "Relevant open roles" in the Map sweep for every company it checked. Gate the "needs browser" roles yourself in the browser (Workday and similar). The LinkedIn guest search below stays in the main chat, in the user's own LinkedIn browser.
+3. **Inline find and gate** (fallback, "needs browser" roles, single links):
+   - **Map sweep:** open each careers page; also search `html.duckduckgo.com/html/?q=<company> <title words>`; in the user's own LinkedIn browser, the guest search `/jobs-guest/jobs/api/seeMoreJobPostings/search?keywords=<company> <title>&location=<country>&f_TPR=r2592000`.
    - **Title search:** `<title words> (<city> OR <city>) site:<ATS domain>` across Personio, JOIN, Ashby, Greenhouse, Lever, Recruitee, Teamtailor, SmartRecruiters, softgarden, Workable; posting language variants too.
    - De-duplicate with `trk.py "Application Tracker.xlsx" known` before opening postings.
-3. **Gate** each role before any letter: live on the company's own site · real apply route and class: OPEN (guest form) / LOGIN (Workday, SuccessFactors, Oracle, Eightfold, e-mail PIN → portal sitting: fill the sign-up or sign-in form, user OKs the account and enters password and code, then finish the application) / HUMAN CHECK (fill, user clicks) / E-MAIL (draft, user sends) · level, location, contract type · fit against the real text (other discipline, far lower pay, visa → drop or flag). Postings go stale: gate and submit the same day.
+   - **Gate** each role before any letter: live on the company's own site · real apply route and class: OPEN (guest form) / LOGIN (Workday, SuccessFactors, Oracle, Eightfold, e-mail PIN → portal sitting: fill the sign-up or sign-in form, user OKs the account and enters password and code, then finish the application) / HUMAN CHECK (fill, user clicks) / E-MAIL (draft, user sends) · level, location, contract type · fit against the real text (other discipline, far lower pay, visa → drop or flag). Postings go stale: gate and submit the same day.
 4. **Approve:** shortlist of 4–8 roles, each with city, company, role, route, flags, a **fit score** (A strong / B plausible) with two "why it fits" reasons taken from the posting next to the user's CV and one "gap" line → the user's OK (**review mode**, default), or apply clear A-matches under a brief the user stated in this session (**brief mode**). Borderline roles always go to the shortlist.
-5. **Pack:** letter per `references/letters.md`; CV in the posting's language; one upload slot → merge letter + CV (+ references) with `build_pack.py`.
+5. **Pack:** letter per `references/letters.md`, then `letter-reviewer` on every letter and drafted free-text answer (model and shadow slots from `frontier.py pick letter-reviewer`); fix each FIX item or put it to the user, and pack only letters with PASS. CV in the posting's language; one upload slot → merge letter + CV (+ references) with `build_pack.py`.
 6. **Submit:** `references/form-routine.md`; read the confirmation (success URL or thank-you text).
-7. **Record:** tracker row with every screening answer (`trk.py add`), folder `Applications/YYYY-MM-DD Company - Role (City)` with letter or pack, Map sweep row (careers page, ATS, last checked, roles, action), `sync_folders.py . --write`.
-8. **Close:** rewrite `_Playbook/handoff.md` (state only, under one page) and report.
+7. **Record:** tracker row with every screening answer (`trk.py add`), folder `Applications/YYYY-MM-DD Company - Role (City)` with letter or pack, Map sweep row (careers page, ATS, last checked, roles, action), `sync_folders.py . --write`. Log the dispatches you started and label outcomes in one `frontier.py label` call (rules in `references/team.md`).
+8. **Close:** `frontier.py report --html "Model Frontier.html"`, rewrite `_Playbook/handoff.md` (state only, under one page) and report.
 
 Everything that needs the user (sign-in, account, human check, a personal answer, an e-mail to send) is collected and done in one sitting while they are at the computer. A filled form is never left open for later.
 
 **Question queue:** a form question with no OK answer in the bank goes into "Questions for the user" in `handoff.md` (question, company, a draft from the closest story). Ask them all in one batch at the end of the session; store each approved answer in `answer_bank.md` as OK so it is never asked again.
 
 ## Token rules
-One batch per fresh chat. Narrow mail queries, no raw dumps or whole threads. No letter before the gate. Scripts instead of click-by-click; one read-back instead of screenshots. No broad listing of folders: name exact paths. Do not re-read unchanged files. Browser script output: strip `=&?` and stay under about 1,000 characters.
+One batch per fresh chat (with the team, a batch can cover up to 30 companies because page reading stays with the agents). Narrow mail queries, no raw dumps or whole threads. No letter before the gate. Scripts instead of click-by-click; one read-back instead of screenshots. No broad listing of folders: name exact paths. Do not re-read unchanged files. Browser script output: strip `=&?` and stay under about 1,000 characters.
 
 ## Report
-Submitted (career site / Easy Apply) · map-sweep progress · waiting on the user (exactly what to do) · held or skipped (why) · pending tracker writes (if the folder was down) · tracker counts.
+Submitted (career site / Easy Apply) · map-sweep progress · waiting on the user (exactly what to do) · held or skipped (why) · pending tracker writes (if the folder was down) · tracker counts · team: agents dispatched, models in use, frontier changes.
