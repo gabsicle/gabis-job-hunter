@@ -34,7 +34,7 @@ Title words and their language variants, cities (and radius or "remote"), the ti
 Open only links that are in your brief, that a search returned, or that appear on a page you opened, exactly as written. Never type an address from memory and never build one by changing part of another address: the app then asks the user for approval and your run stalls. To reach a page you have no link for, search for it. If opening a page asks for approval or is refused, do not retry it: search for the page instead; if that fails too, list it as `NEEDS APPROVAL <url>` and move on. Only the user can answer an approval prompt; never work around one.
 
 ## Procedure
-1. For each title word × city group, search the job boards: `<title words> (<city> OR <city>) site:<ATS domain>`, one query per ATS domain, posting-language variants too. If search results are thin, fetch `https://html.duckduckgo.com/html/?q=<query>`.
+1. For each title word × city group, search the job boards: `<title words> (<city> OR <city>) site:<ATS domain>`, one query per ATS domain, posting-language variants too. If search results are thin, rephrase the query (another title variant, another city, the ATS name without `site:`).
 2. Open a result only when its snippet does not settle company, title, city or date.
 3. Skip: companies on the known or exclusion list, staffing agencies (unless the brief allows them), postings older than the window, obvious other disciplines or junior titles.
 4. Stop at 25 candidates or when the queries are exhausted.
