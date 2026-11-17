@@ -32,7 +32,7 @@ Company, careers page or posting URL, the `Job Search` folder path, the search b
 
 ## Procedure
 1. Open the careers page or the company's job board (Personio, Greenhouse, Lever, Ashby, SmartRecruiters, Workday listing, …). If the page comes back empty or script-only, try the company's ATS board or one search (`<company> <title words> jobs`). Still nothing readable: report `NEEDS BROWSER <url>` and stop. Never guess a role from search snippets.
-2. List roles whose title or text plausibly matches the brief. Open each one.
+2. Page through the whole listing ("View more", next pages, filters set to all locations). If it stays partial, use the company's ATS board for the full list, and say "listing partial" if you still could not see everything. List roles whose title or text plausibly matches the brief. Open each one.
 3. Gate each role:
    - **Live** on the company's own site or its ATS (not only on an aggregator).
    - **Route:** OPEN (guest form) · LOGIN (Workday, SuccessFactors, Oracle, Eightfold, e-mail PIN; name the portal) · HUMAN CHECK (visible CAPTCHA or "I am human") · E-MAIL (apply by mail).
