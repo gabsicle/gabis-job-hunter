@@ -5,6 +5,7 @@ The main chat leads. Agents take the page-heavy, writing and checking work, so t
 | Agent | Does | Per session | Writes |
 |---|---|---|---|
 | `job-crawler` | Finds fresh postings on ATS boards and public job pages by title and city | 2-4, up to 6 when widening (wave 1) | nothing |
+| `headhunter` | Goes off-script (funding rounds, PE deals, leadership changes, search-firm mandates, niche boards) for hidden roles; nuggets and leads | 1, 2 when widening (wave 1) | nothing |
 | `posting-gater` | Gates one company's roles, or up to 4 posting links: live, route, level, place, contract, fit | 10-20 (wave 1) + up to 6 (wave 2) | nothing |
 | `approval-desk` | Checks the shortlist against the rules and the session brief; one approval card | 1 (+ shadow) | nothing |
 | `letter-writer` | Reads the posting, drafts one letter for one approved role from the team pack and the CV only | 1 per approved role | its draft and a posting copy |
@@ -14,8 +15,8 @@ The main chat leads. Agents take the page-heavy, writing and checking work, so t
 ## Session flow
 ```
 main chat: handoff + rules + known list -> TEAM PACK
-wave 1   : gater x 10-20 (trk.py sweep)  +  crawler x 2-6  (one message, parallel)
-wave 2   : gater x <=6 on the crawler finds (<=4 links each)
+wave 1   : gater x 10-20 (trk.py sweep) + crawler x 2-6 + headhunter x 1-2  (one message, parallel)
+wave 2   : gater x <=6 on crawler finds and headhunter nuggets (<=4 links each); leads -> user
 desk     : approval-desk on the merged shortlist -> card -> user's OK
 letters  : letter-writer x n (one message) -> letter-reviewer x n (+ shadow, one message) -> one fix round
 main chat: render, forms, submit, tracker, log + label, report
@@ -47,6 +48,7 @@ CV paths must be readable by the agents too: if the Job Search folder is on anot
 | `job-crawler` | sonnet | haiku, sonnet, opus |
 | `posting-gater` | sonnet | haiku, sonnet, opus |
 | `company-researcher` | sonnet | haiku, sonnet, opus |
+| `headhunter` | opus | sonnet, opus |
 | `letter-writer` | sonnet | sonnet, opus |
 | `letter-reviewer` | opus | sonnet, opus |
 | `approval-desk` | opus | sonnet, opus |
@@ -71,6 +73,13 @@ Postings to gate: <up to 4 links, one per line, with company and title from the 
 Team pack: <path>
 Title words: <titles and language variants>. Cities: <city group, radius or remote>. Window: last <n> days (today is <date>).
 Focus: <the widening this crawler covers, e.g. "other cities: Munich, Berlin" | "PE portfolio roles" | standard>
+```
+**Headhunter**
+```
+Team pack: <path>
+Grounds: <your pick | the grounds for this headhunter, different from the other one's>
+Already covered: <the crawlers' title words, cities and boards this session>
+Budget: <pages, default 60>
 ```
 **Approval desk**
 ```
@@ -100,9 +109,10 @@ Answers: <free-text answers drafted for this application | none>
 
 ## Merging
 - Wave 1 + 2: drop roles at known companies, A before B, freshest first. Keep `NEEDS BROWSER` and `NEEDS APPROVAL` lines together for the card.
-- Crawler finds at companies already gated in wave 1 are not gated again.
+- Crawler finds and headhunter nuggets at companies already gated in wave 1 are not gated again.
+- Headhunter leads go into the report's "Leads" section and under "Leads" in `handoff.md` (company, signal, source, date); they are never gated or applied to.
 - Letters: a writer's entry goes into `letters.json` under its key only after the reviewer's PASS.
-- `frontier.py log` one row per dispatch: tokens if reported, otherwise the `chars` on the agent's RUN line. Tasks: `gate:<Company>`, `crawl:<focus>:<date>`, `approve:<date>`, `write:<Company>`, `review:<Company>`, shadow runs `review-shadow:<Company>` and `approve-shadow:<date>`.
+- `frontier.py log` one row per dispatch: tokens if reported, otherwise the `chars` on the agent's RUN line. Tasks: `gate:<Company>`, `crawl:<focus>:<date>`, `hunt:<n>:<date>`, `approve:<date>`, `write:<Company>`, `review:<Company>`, shadow runs `review-shadow:<Company>` and `approve-shadow:<date>`.
 
 ## Approvals
 - **Review mode** (default): nothing goes out before the user's one-line OK ("go", "go 1, 3").
@@ -119,6 +129,7 @@ One `frontier.py label '<json [[task, quality], …]>'` call per session. Label 
 |---|---|---|
 | `posting-gater` | `gate:<Company>` | 1 if route, fit grade and "live" hold when you apply or the user decides; 0 if any is overturned, or the user rejects the role as clearly off-brief, or a matching role at a company it marked NONE turns up within 14 days |
 | `job-crawler` | `crawl:<focus>:<date>` | share of its finds that passed the gate (0-1) |
+| `headhunter` | `hunt:<n>:<date>` | (nuggets that passed the gate + leads the user kept) ÷ everything it reported; 0 if it reported nothing |
 | `approval-desk` | `approve:<date>` | share of its recommendations the user followed. Shadow: share of its verdicts that match the governing desk's |
 | `letter-writer` | `write:<Company>` | 1 if the first draft got PASS and the user approved it without content changes; 0.5 if PASS after the fix round; 0 if it went to the user with FIX or the user rewrote content |
 | `letter-reviewer` | `review:<Company>` | 1 if nothing it passed is later corrected by the user or caught at read-back; 0 otherwise. Shadow: 1 if it found the same FIX items as the governing reviewer and no false ones |

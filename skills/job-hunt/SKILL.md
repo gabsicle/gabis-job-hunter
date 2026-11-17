@@ -1,6 +1,6 @@
 ---
 name: job-hunt
-description: Runs the Gabis Job Hunter application loop as an agent team - crawler and gater agents find and gate roles in parallel, an approval-desk agent turns the shortlist into one card, letter-writer and letter-reviewer agents draft and check every letter, and the main chat handles the user, forms, submissions and the tracker. Career sites first; LinkedIn Easy Apply only when asked. Use when the user says "find me jobs", "apply", "continue applying", "job hunt", "search wider", "apply to this company or role", "sweep my target companies", or gives a session brief.
+description: Runs the Gabis Job Hunter application loop as an agent team - crawler, gater and headhunter agents find and gate roles in parallel (the headhunter off-script, for hidden roles), an approval-desk agent turns the shortlist into one card, letter-writer and letter-reviewer agents draft and check every letter, and the main chat handles the user, forms, submissions and the tracker. Career sites first; LinkedIn Easy Apply only when asked. Use when the user says "find me jobs", "apply", "continue applying", "job hunt", "search wider", "apply to this company or role", "sweep my target companies", or gives a session brief.
 ---
 
 # Job hunt
@@ -15,7 +15,7 @@ Hard rules:
 4. **Scripts never block a dispatch.** Use `frontier.py pick` for models; if it or any other script fails, use the default models in `references/team.md` and dispatch anyway. Tracker writes that cannot run go under "Pending tracker writes" in the hand-off.
 5. **Only the main chat starts agents** (agents cannot start agents). Start each wave in one message so its agents run in parallel; if the app refuses that many at once, send the wave in messages of 10.
 6. **Plugin agent types missing** (no `gabis-job-hunter:posting-gater` etc. in your agent list) but the Agent tool is there: start `general-purpose` agents and put the body of the matching file from the plugin's `agents/` folder (next to `skills/`) at the top of each brief. Only with no Agent tool at all, or after two dispatches in a row that return an error from the Agent tool itself, follow `references/inline.md`. An agent that finds nothing, reports `NEEDS BROWSER` or stalls on an approval prompt has not failed.
-7. **The report opens with the team line:** `Team: crawler ×n · gater ×n · approval-desk ×n · letter-writer ×n · letter-reviewer ×n · models <agent=model, …>`, or `Team: none - <reason>`.
+7. **The report opens with the team line:** `Team: crawler ×n · headhunter ×n · gater ×n · approval-desk ×n · letter-writer ×n · letter-reviewer ×n · models <agent=model, …>`, or `Team: none - <reason>`.
 
 ## Start
 1. In the user's `Job Search` folder, read `_Playbook/handoff.md` and `_Playbook/rules.md`. No `_Playbook/` → run the `job-hunter-setup` skill first.
@@ -44,8 +44,9 @@ Follow `_Playbook/rules.md` exactly. In short: portal accounts only after the us
 2. **Wave 1, find (one message, parallel):**
    - `posting-gater` × the companies from `trk.py … sweep` (10-20, built by target-companies), one company per agent.
    - `job-crawler` × 2-4, split by city group or title family; up to 6 when the user widens the search (other cities, remote, other titles, other industries), one crawler per widening. Always at least one, so new employers keep coming in.
-   - Models: `frontier.py pick posting-gater --n <gaters>` and `frontier.py pick job-crawler --n <crawlers>`; briefs in `references/team.md`.
-3. **Wave 2, gate the finds:** crawler finds at companies not yet gated and not known → `posting-gater` agents with up to 4 posting links each, at most 6 agents. Merge both waves: drop known companies, then order by the user's stated priority (e.g. "NRW first"), A before B, freshest first; keep `NEEDS BROWSER` and `NEEDS APPROVAL` lines in their own lists. Gate a `NEEDS BROWSER` role yourself in the browser only when its title looks like an A-match.
+   - `headhunter` × 1, off-script on grounds the crawlers do not cover; × 2 on different grounds when the user widens the search or asks for something unusual.
+   - Models: `frontier.py pick` for `posting-gater`, `job-crawler` and `headhunter` with their counts; briefs in `references/team.md`.
+3. **Wave 2, gate the finds:** crawler finds and headhunter nuggets at companies not yet gated and not known → `posting-gater` agents with up to 4 posting links each, at most 6 agents. Headhunter leads (no posting yet) are never gated or applied to: they go into a "Leads" section of the report and the hand-off for the user to decide. Merge both waves: drop known companies, then order by the user's stated priority (e.g. "NRW first"), A before B, freshest first; keep `NEEDS BROWSER` and `NEEDS APPROVAL` lines in their own lists. Gate a `NEEDS BROWSER` role yourself in the browser only when its title looks like an A-match.
 4. **Approval desk:** shortlist of 4-8 roles in gater format → `approval-desk` with the session brief word for word (or `none`). Show the user the desk's card on top of the shortlist (city, company, role, route, flags, fit A/B, two "why it fits" lines, one gap) and the pages, accounts, human checks and salary questions that need them.
    - **Review mode** (default): wait for the user's one-line OK ("go 1, 3").
    - **Brief mode** (only under a brief the user typed in this session that tells you to apply without asking, e.g. "apply to every A-match in Köln, report after"): the roles the desk marked GO go on to step 5 without waiting; ASK roles wait for the user. A search ask ("search wider", "find me jobs in Berlin") is never a brief.
@@ -64,4 +65,4 @@ Everything that needs the user (a page to approve, sign-in, account, human check
 One batch per fresh chat; with the team a batch can cover up to 30 companies, because page reading stays with the agents. Agent results only: never pull an agent's page text into the main chat. Narrow mail queries, no raw dumps or whole threads. Scripts instead of click-by-click; one read-back instead of screenshots. Name exact paths, no broad folder listings. Do not re-read unchanged files. Browser script output: strip `=&?` and stay under about 1,000 characters.
 
 ## Report
-Team line first (hard rule 7) · submitted (career site / Easy Apply) · map-sweep progress · waiting on the user (exactly what to do, pages to approve included) · held or skipped (why) · pending tracker writes (if the folder was down) · tracker counts · frontier changes.
+Team line first (hard rule 7) · submitted (career site / Easy Apply) · map-sweep progress · waiting on the user (exactly what to do, pages to approve included) · headhunter leads (company, signal, angle, source) · held or skipped (why) · pending tracker writes (if the folder was down) · tracker counts · frontier changes.
