@@ -1,5 +1,7 @@
 # Letters
 
+`letter-writer` agents draft from these rules (one per approved role), `letter-reviewer` agents check each draft, and the main chat merges the PASS entries into `letters.json` and renders them.
+
 ## Tone and structure
 - One page, the posting's language, calm and factual ("chill"): no superlatives, no "passionate", no "I am the perfect fit".
 - Structure: hook in the posting's own words → proof 1 (most relevant recent role, two or three real figures) → proof 2 → advisory or sector paragraph only if the posting asks for it → close (location or commute, languages, earliest start).
