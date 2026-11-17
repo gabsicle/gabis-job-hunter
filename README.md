@@ -46,15 +46,17 @@ When something needs you (a portal login, a human check, an e-mail to send), it 
 Page-heavy work runs in separate agents, so your main chat stays short and sharp and a batch can cover up to 30 companies.
 | Agent | What it does |
 |---|---|
-| **project-lead** | Runs the sweep (or market-map research): picks a model for each worker, staffs them in parallel, merges one shortlist |
 | **job-crawler** | Finds fresh postings on job boards and ATS sites by title and city, beyond your target list |
 | **posting-gater** | Checks one company's careers page and gates each role: live, apply route, level, place, contract, fit |
+| **approval-desk** | Checks the shortlist against your rules and the brief you gave, and hands you one card: recommended, not recommended, dropped. You approve with one line |
 | **letter-reviewer** | Independent check of every letter and drafted answer against your CV and rules before you see it |
 | **company-researcher** | Researches one segment of your market map with verified careers pages and sources |
 
-Agents only read and report. Forms, portal accounts, submissions and the tracker stay in your main chat, with you. If your Claude cannot run agents, every skill falls back to doing the work in the main chat.
+Your main chat runs the team: it starts the agents, picks a model for each and merges their results. Agents only read and report. Forms, portal accounts, submissions and the tracker stay in your main chat, with you. If your Claude cannot run agents, every skill falls back to doing the work in the main chat.
 
-**Model frontier.** Each agent runs on the cheapest model that holds quality. A small script Claude writes at setup (`frontier.py`) logs every agent run (cost) and what happened next (quality: did the gate hold, did the letter need a fix), plots cost against quality per agent, and picks from the efficient frontier, Markowitz-style, with a few low-risk test runs on cheaper models. The letter reviewer only tests cheaper models in parallel with the main one, so a weaker check never decides. Open `Model Frontier.html` in your folder to see the chart.
+**Approvals stay yours.** No agent can give your OK or answer a permission prompt from the Claude app. Agents avoid such prompts by opening only pages they found by search; whatever still needs you (a page to approve, a job board that needs a browser, a portal account, a human check) is collected into one list.
+
+**Model frontier.** Each agent runs on the cheapest model that holds quality. A small script Claude writes at setup (`frontier.py`) logs every agent run (cost) and what happened next (quality: did the gate hold, did the letter need a fix), plots cost against quality per agent, and picks from the efficient frontier, Markowitz-style, with a few low-risk test runs on cheaper models. The letter reviewer and the approval desk only test cheaper models in parallel with the main one, so a weaker check never decides. Open `Model Frontier.html` in your folder to see the chart.
 
 ## Your files (all in your folder, nothing leaves it except what you apply with)
 `Application Tracker.xlsx` (Applications, Summary, Map sweep) · `Applications/YYYY-MM-DD Company - Role (City)/` · `_Playbook/` with your profile, answer bank, rules, hand-off note, the agent run log (`model_runs.csv`) and small scripts Claude writes for you at setup (letters, tracker, folders, packs, form autofill, Easy Apply runner, model frontier) · `Model Frontier.html`. The plugin itself contains only instructions and templates, no code.
