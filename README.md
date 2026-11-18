@@ -46,11 +46,11 @@ When something needs you (a portal login, a human check, an e-mail to send), it 
 Every session runs as a team. Your main chat leads: it talks to you, starts the agents, merges their results, fills forms, submits and keeps the tracker. The agents do the page-heavy, writing and checking work in parallel, so a batch can cover up to 30 companies.
 | Agent | What it does |
 |---|---|
-| **job-crawler** | Finds fresh postings on job boards, ATS sites and public LinkedIn job pages by title and city, beyond your target list. "Search wider" means more crawlers |
+| **job-crawler** | Finds fresh postings on job boards and ATS sites (StepStone, Personio, Greenhouse and others) by title and city, beyond your target list; LinkedIn is the raider's. "Search wider" means more crawlers |
 | **easy-apply-raider** | Works only on LinkedIn, in your signed-in browser: finds and checks Easy Apply roles every session, hands the other LinkedIn finds to the gaters, and after your OK submits the approved Easy Apply roles one by one (max 30, nothing it can't answer from your rules) |
 | **headhunter** | Goes off-script: funding rounds, PE deals, leadership changes, search-firm mandates, niche boards. Follows trails to hidden roles and brings back a few gold nuggets, plus leads where a role is about to open (never applied to; you decide) |
 | **posting-gater** | Checks one company's careers page (or a few links from the crawlers) and gates each role: live, apply route, level, place, contract, fit |
-| **duplicate-guard** | Checks every role against everything you've applied to (tracker, dropped roles, folders, your mailbox), matching company names across legal forms and group brands. Blocks repeats before you see them; a final check runs right before every submission |
+| **duplicate-guard** | Checks every role against everything you've applied to (tracker, dropped roles, folders, your mailbox) with your re-apply rules: the same role never again, from any source; another role at the same company only after 30 days, or earlier only if it's clearly more interesting and you say yes. Matches reworded titles, short forms and group brands; a final check runs right before every submission |
 | **approval-desk** | Checks the shortlist against your rules and the brief you gave, and hands you one card: recommended, not recommended, dropped. You approve with one line |
 | **letter-writer** | Drafts one letter per role you approved, only from your CV, in the posting's language |
 | **letter-reviewer** | Independent check of every letter and drafted answer against your CV and rules before you see it |
@@ -76,4 +76,5 @@ Every session runs as a team. Your main chat leads: it talks to you, starts the 
 - Start in a fresh chat for each batch; say "continue applying" and it picks up from the hand-off note.
 - Check the first five letters and answers closely; correct anything once and it is saved for next time.
 - Easy Apply brings volume; career-site applications with a tailored letter get more replies per application. Running both is the default.
+- LinkedIn's user agreement does not allow automated applying. The Easy Apply lane runs in your own account at your own risk: it keeps a slow pace, stops at any warning or check, and you can switch it off per session ("career sites only").
 

@@ -36,7 +36,7 @@ First ask the user to describe the job they want in their own words (two or thre
 - **Work authorisation:** where they may work without a visa, where they need sponsorship.
 - **Languages and levels.**
 - **Boundaries:** topics never to mention (for example reasons for leaving, health, conflicts), companies never to apply to, people never to cite as a source, whether to give date of birth and gender (default: only when mandatory, never optional).
-- **Approval:** default "shortlist approval" (they OK each batch). Offer "session brief" (they state a brief such as "apply to everything in Berlin that passes the gate" and the session applies to clear matches only).
+- **Approval:** always "shortlist approval" by default (they OK each batch). Explain that they can type a session brief at the start of any job-hunt session ("apply to every A-match with an open form, report after"); it covers that session only and is never stored.
 - **Browsers and identity:** which browsers Claude can drive here (built-in browser pane, Claude in Chrome) and which LinkedIn or portal accounts each one is signed in with. Never assume a signed-in account is theirs.
 
 ## 4. Write the files
@@ -53,7 +53,7 @@ Use the templates in `references/`:
 ## 5. Confirm and hand over
 1. Show a short summary: targets, places, pay phrase, start date, boundaries, the years table and the stories. Ask the user to correct or OK it; mark confirmed answer-bank entries "OK".
 2. Tell them what to say next: "build my target company list" (target-companies), "find me jobs" (job-hunt), "any news on my applications?" (application-inbox).
-3. Mention once, in one sentence, that Job Hunter works as an agent team: crawlers and gaters find and check roles in parallel, a LinkedIn raider handles Easy Apply, a headhunter goes off-script for hidden roles, an approval desk turns the shortlist into one card to OK, letter writers draft and an independent reviewer checks every letter, and each agent runs on the cheapest model that holds quality, learned from results.
+3. Say once, plainly, before the first session: LinkedIn's user agreement does not allow automated applying, so the Easy Apply lane runs in the user's own account at the user's own risk (LinkedIn can restrict accounts); it keeps a slow pace, stops at any warning, and can be switched off per session ("career sites only"). Mention once, in one sentence, that Job Hunter works as an agent team: crawlers and gaters find and check roles in parallel, a LinkedIn raider handles Easy Apply, a headhunter goes off-script for hidden roles, an approval desk turns the shortlist into one card to OK, letter writers draft and an independent reviewer checks every letter, and each agent runs on the cheapest model that holds quality, learned from results.
 4. Mention once that a mail connector (Gmail or Outlook) lets Job Hunter check for duplicates and replies, and that Claude in Chrome is needed for career-site forms with file uploads.
 5. Offer a daily job feed: a weekday scheduled task that sweeps the inbox and the next Map sweep companies and leaves a shortlist (it never submits on its own). Create it only if the user says yes, at the time they choose.
 

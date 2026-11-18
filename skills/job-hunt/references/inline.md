@@ -1,6 +1,6 @@
 # Inline fallback (no agents)
 
-Use this only when the Agent tool is missing from this session, or two dispatches in a row failed. With the Agent tool present, the team runs, even if the plugin's agent types are missing (start general-purpose agents with the agent file's body, hard rule 6). Open the report with `Team: none - <reason>`.
+Use this only when the Agent tool is missing from this session, or two dispatches in a row failed. With the Agent tool present, the team runs, even if the plugin's agent types are missing (start general-purpose agents with the agent file's body, hard rule 7). Open the report with `Team: none - <reason>`.
 
 Batches stay at 15-20 companies, because every page now lands in the main chat.
 
@@ -16,7 +16,7 @@ Live on the company's own site · real apply route and class: OPEN (guest form) 
 Before showing the shortlist, run the approval desk's checks yourself (`agents/approval-desk.md`): rules, evidence, brief; GO only under a brief the user typed in this session.
 
 ## Duplicates
-Before the card: `trk.py … check` for every candidate company, plus one mailbox search per company; drop every `APPLIED` match and show group or name look-alikes to the user. Again right before every submit.
+Before the card: `trk.py … check "<company>" "<title>"` for every candidate, plus one mailbox search per company, and apply the re-apply rules: BLOCK is skipped and never offered, ASK goes to the user with the earlier role, OK goes on. Again right before every submit.
 
 ## Easy Apply
 Run `references/easy-apply.md` yourself in the user's signed-in browser: raid, put the list on the card, submit only approved ids.

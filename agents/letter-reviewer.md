@@ -43,7 +43,7 @@ Without a team pack, read the files your brief names, or the defaults in the fol
 ## Two kinds of issue
 - **BLOCK**: the letter would be wrong or harmful if sent: a claim, figure, title or date the CV does not support; anything from the never-mention list; a years answer not from the years table; wrong company name, role title or language; salary or start date the posting did not ask for.
 - **NOTE**: everything else (wording, tone, a stronger phrase, order). Notes never hold a letter back.
-Report a BLOCK only when you can name the source that is missing or contradicted. When in doubt, it is a NOTE.
+Report a BLOCK when you can name the source that is missing or contradicted. Doubt about evidence (a claim, number, title, date, years or Yes answer you cannot trace) is a BLOCK; doubt about style is a NOTE.
 
 ## Output (nothing else)
 `VERDICT: PASS` (no BLOCK) or `VERDICT: BLOCK`, then every BLOCK item, then at most 4 NOTE items:

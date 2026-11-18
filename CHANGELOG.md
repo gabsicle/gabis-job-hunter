@@ -1,5 +1,17 @@
 # Changelog
 
+## 0.6.0 – 19 Nov 2026
+Re-apply rules from the owner and a guardrail audit.
+- Re-apply rules: the same role at the same company is never applied to again, from any source (reworded titles, short forms and translations count as the same role); a different role at the same company only after 30 days; within 30 days only if clearly more interesting, and only with the user's yes. `trk.py` 5 `check` gives BLOCK / ASK / OK with the earlier role and date; excluded companies always BLOCK. duplicate-guard adds ASK and becomes read-only (mail hits come from the main chat).
+- Least privilege: easy-apply-raider gets only a browser and Read; general-purpose fallback agents get an explicit allowed-tools line.
+- Integrity baseline: SHA-1 of the `_Playbook` scripts, rules, answer bank, profile and runner config, re-checked before any script is pasted and before every submission.
+- Approval only from the user's own words in this session; hand-off, rules, scheduled prompts and earlier chats never count; unattended runs submit nothing. "Go" and "all" never cover ASK, WARN or flagged lines.
+- Tracker row written right after each confirmation; a failed check or a pending tracker write stops the role.
+- No workarounds on refused pages or bot checks, in any agent or browser.
+- Forms get only the profile fields they ask for, deleted after read-back. E-mails go out only after the user approves the exact text.
+- Evidence: years questions only from whole-word years-table matches; uncovered fields are UNKNOWN; every non-contact career-site answer goes to the reviewer; doubt about evidence is a BLOCK.
+- LinkedIn terms notice at setup and in the README.
+
 ## 0.5.0 – 19 Nov 2026
 Two lanes every session, a LinkedIn agent, a duplicate filter and a faster letter path, from the first live agent sessions.
 - New `easy-apply-raider` agent: works only on LinkedIn in the user's signed-in browser; raids and gates Easy Apply roles, hands other LinkedIn finds to the gaters, and after approval submits only the approved job ids (dry run per job, auto-submit reset after every job, max 30 a session). Easy Apply is now lane B in every session; the user can switch it off.

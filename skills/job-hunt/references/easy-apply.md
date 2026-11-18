@@ -4,7 +4,7 @@ The `easy-apply-raider` agent runs this lane (`agents/easy-apply-raider.md`): a 
 
 ## Find (raid)
 - Normal job search page, one title × place at a time: `https://www.linkedin.com/jobs/search/?keywords=<title>&location=<place>&f_TPR=r604800`, plus an Easy Apply-only pass with `&f_AL=true`. Read the result list as page text.
-- Open each candidate's job page and gate it: place and on-site days, contract type, level, years asked, pay if stated, company not known and not on the do-not-gate list. One role per company.
+- Open each candidate's job page and gate it: place and on-site days, contract type, level, years asked, pay if stated, company not on the never-apply list, and the re-apply rules (same role never again; another role at the same company only after 30 days). One role per company per raid.
 - Easy Apply roles go on the EASY APPLY list; "Apply on company website" roles go to the gaters (lane A).
 - Pace: one page at a time, a few seconds apart, no parallel tabs. Stop at any CAPTCHA, security check or limit message.
 
@@ -22,7 +22,7 @@ The user uploads their current CV once to the LinkedIn résumé library (`linked
 - Location and on-site days from the **job page**, not the search list; outside `commute_regex` → skip unless the user agreed.
 - Contract type from the job text: fixed-term, interim, parental cover, junior → skip and flag.
 - Every years answer comes from the years table; industry-specific "years in X" without evidence stays UNKNOWN.
-- One application per company across both lanes: check the tracker first.
+- Re-apply rules across both lanes: `trk.py … check "<company>" "<title>"` must say OK, or ASK with the user's yes for that role by name or number.
 
 ## Record
 One tracker row per submission (`trk.py add`) with channel "LinkedIn Easy Apply" and every answer the runner logged; add a short folder only if a letter or custom answer was used.

@@ -32,7 +32,7 @@ You draft one cover letter. You do not send, upload or submit anything, sign in 
 - `Role:` the gater block (title, company, city, route, language, the two "why it fits" lines, the gap).
 - `Posting URL:` open it and read the full posting. If the page says the role is closed, filled or no longer accepting applications, report `CLOSED <url>` and write nothing. Ask the fetch for the text word for word (title, company, place, every section), not a summary; if it still returns a summary, say so at the top of the posting copy. Open only this link, exactly as written (no addresses from memory). If it does not load or asks for approval, report `NEEDS BROWSER <url>` and write nothing. A `Posting text:` field in your brief replaces the URL: use that text and do not open the link.
 - `CV:` the CV in the posting's language.
-- `Write to:` the only folder you may write in.
+- `Write to:` the only folder you may write in. Never write, edit or create a file anywhere else, above all nothing under `_Playbook/` (scripts, rules, answer bank, profile): the main chat checks those files and stops everything if they change.
 - `Fix list:` the reviewer's BLOCK items and the previous draft, or `none`. Apply each BLOCK fix exactly as written; ignore NOTE items.
 A file you cannot read is a finding: report it and write nothing.
 

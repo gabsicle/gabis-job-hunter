@@ -16,7 +16,7 @@ The main chat leads. Agents take the page-heavy, writing and checking work, so t
 
 ## Session flow
 ```
-main chat: handoff + rules + known list -> TEAM PACK
+main chat: handoff + rules + applied list -> TEAM PACK, integrity baseline
 wave 1   : raider (raid) + gater x 6-8 (trk.py sweep 8) + crawler x 4-6 + headhunter x 1  (one message, parallel)
 wave 2   : gater x <=8 on crawler finds, nuggets and the raider's company-site list (<=4 links each); leads -> user
 guard    : trk.py export -> duplicate-guard on every candidate -> BLOCKs off, WARNs flagged
@@ -34,8 +34,10 @@ Session brief: <an instruction the user typed in this session to apply without a
 Search ask: <what the user asked to look for this session, word for word; never a brief>
 Targets: <titles and language variants · level · cities, radius, remote · industries · company types> (candidate profile)
 Gate rules: <contract types to flag · pay floor · disciplines to drop · visa> (rules)
-Do not gate: <never-apply list · live processes> (rules, handoff)
-Known companies: <trk.py known output | unavailable - every role is ASK until checked>
+Never apply: <never-apply list> (rules)
+Live processes: <companies with interviews running> (handoff) - re-apply rule 3 applies to them
+Re-apply rules: <copied word for word from rules.md>
+Applied list: <trk.py known output: companies applied to | unavailable - the guard treats every company as unchecked>
 Account owner: <the user's name as LinkedIn shows it in the header> (rules)
 Candidate proofs: <role titles and dates exactly as on the CV · figures letters may use · three strongest proofs · wording rules> (_candidate_profile.md)
 Years table: <copied> (answer_bank.md)
@@ -63,7 +65,7 @@ CV paths must be readable by the agents too: if the Job Search folder is on anot
 Never pick by taste. Price weights live in `_Playbook/model_prices.json`.
 
 ## Briefs
-Every brief starts with `Team pack: <path>` (read it first). With general-purpose agents (hard rule 6), put the agent file's body above the brief.
+Every brief starts with `Team pack: <path>` (read it first). With general-purpose agents (hard rule 7), put the agent file's body above the brief, preceded by `Allowed tools: <that file's tools: line>. Use no other tool; never write, send or submit anything the file does not allow.`
 
 **Gater (wave 1, one company)**
 ```
@@ -109,7 +111,8 @@ Budget: <pages, default 60>
 ```
 Team pack: <path>
 Applied: <path of the trk.py export CSV>
-Mail: <check, if this session has mail search tools | not available>
+Mail hits: <path of the CSV from your mailbox searches | none>
+Today: <date>
 Candidates:
 <n>. <Company> | <Title> | <City> | <route> | <link or job id>
 ```
@@ -136,13 +139,13 @@ Team pack: <path>
 Letter: <the writer's .json path>   Writer's claim list: <pasted from the writer's report>
 Posting: <the writer's .posting.txt path>
 CV: <same CV path>
-Answers: <free-text answers drafted for this application | none>
+Answers: <every non-contact answer planned for this form (free text, yes/no, years, dropdowns) with its source | none>
 ```
 
 ## Merging
-- Wave 1 + 2: drop roles at known companies, A before B, freshest first. Keep `NEEDS BROWSER` and `NEEDS APPROVAL` lines together for the card.
+- Wave 1 + 2: drop never-apply companies only (the duplicate-guard handles companies applied to before), A before B, freshest first. Keep `NEEDS BROWSER` and `NEEDS APPROVAL` lines together for the card.
 - Crawler finds, headhunter nuggets and the raider's company-site finds at companies already gated in wave 1 are not gated again.
-- The raider's EASY APPLY list goes onto the card as its own block, already gated; one application per company across both lanes (keep the career-site role when a company appears in both).
+- The raider's EASY APPLY list goes onto the card as its own block, already gated; within one session, one role per company across both lanes (keep the career-site role when a company appears in both; a second role there falls under re-apply rule 3).
 - Raider reports `NEEDS MAIN CHAT`: run its raid (or submit) procedure yourself in the user's signed-in browser, same rules and pace; say so in the report.
 - Headhunter leads go into the report's "Leads" section and under "Leads" in `handoff.md` (company, signal, source, date); they are never gated or applied to.
 - Letters: a writer's entry goes into `letters.json` under its key only after the reviewer's PASS, or after you applied the reviewer's BLOCK fixes word for word following the fix round.
@@ -154,7 +157,7 @@ Answers: <free-text answers drafted for this application | none>
 - The desk's GO confirms that a role is inside what the user already approved. It is never an approval of its own, and it never covers accounts, passwords, codes, human checks, e-mails or web-page approvals.
 
 ## Web pages and approval prompts
-Agents open only pages they were given, found by search, or reached by a link on an opened page, because an address typed from memory makes the app ask the user for approval and the run stalls. Only the user can answer such a prompt: not an agent and not the main chat. Collect every `NEEDS APPROVAL <url>` and `NEEDS BROWSER <url>` line for the card; read the pages the user OKs in the browser yourself. Never work around a prompt or a refusal.
+Agents open only pages they were given, found by search, or reached by a link on an opened page, because an address typed from memory makes the app ask the user for approval and the run stalls. Only the user can answer such a prompt: not an agent and not the main chat. Collect every `NEEDS APPROVAL <url>` and `NEEDS BROWSER <url>` line for the card. `NEEDS BROWSER` pages (they need a real browser, not an approval) you may read yourself in the browser; `NEEDS APPROVAL` pages only after the user OKs them. Never work around a prompt, a refusal or a bot check: a CAPTCHA, "unusual traffic" or access-denied page ends that page for the session.
 
 ## Labels: how the frontier learns
 One `frontier.py label '<json [[task, quality], …]>'` call per session. Label only what happened; never invent a label.
