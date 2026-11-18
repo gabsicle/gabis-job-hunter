@@ -4,10 +4,10 @@
 
 ## Tone and structure
 - One page, the posting's language, calm and factual ("chill"): no superlatives, no "passionate", no "I am the perfect fit".
-- Structure: hook in the posting's own words → proof 1 (most relevant recent role, two or three real figures) → proof 2 → advisory or sector paragraph only if the posting asks for it → close (location or commute, languages, earliest start).
+- Structure: hook in the posting's own words → proof 1 (most relevant recent role, two or three real figures) → proof 2 → advisory or sector paragraph only if the posting asks for it → close (location or commute, languages). Earliest start and salary go in the letter only when the posting asks for them in the letter, in any language; otherwise they belong in the form.
 - Titles exactly as on the CV. What was co-led stays co-led; reporting *to* a board is not sitting on it; a business case is not realised savings. Only figures from the CV or `_candidate_profile.md`.
 - Never mention anything listed under "Never mention" in `rules.md`. No reasons for leaving.
-- German postings: "Anschreiben", Sie-Form unless the posting uses du; salary and start date only when the posting asks for them in the letter.
+- German postings: "Anschreiben", Sie-Form unless the posting uses du.
 
 ## Rendering
 `_Playbook/scripts/make_letters.py letters.json <output folder>` renders each letter to PDF (layout in the setup skill's `references/tools.md`).
