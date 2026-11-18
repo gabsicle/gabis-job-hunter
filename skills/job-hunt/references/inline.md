@@ -15,6 +15,9 @@ Live on the company's own site · real apply route and class: OPEN (guest form) 
 ## Approval check
 Before showing the shortlist, run the approval desk's checks yourself (`agents/approval-desk.md`): rules, evidence, brief; GO only under a brief the user typed in this session.
 
+## Duplicates
+Before the card: `trk.py … check` for every candidate company, plus one mailbox search per company; drop every `APPLIED` match and show group or name look-alikes to the user. Again right before every submit.
+
 ## Easy Apply
 Run `references/easy-apply.md` yourself in the user's signed-in browser: raid, put the list on the card, submit only approved ids.
 

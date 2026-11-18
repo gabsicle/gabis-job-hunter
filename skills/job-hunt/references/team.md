@@ -8,6 +8,7 @@ The main chat leads. Agents take the page-heavy, writing and checking work, so t
 | `job-crawler` | Finds fresh postings on ATS boards and other job boards by title and city (not LinkedIn) | 4-6, one more per widening (wave 1) | nothing |
 | `headhunter` | Goes off-script (funding rounds, PE deals, leadership changes, search-firm mandates, niche boards) for hidden roles; nuggets and leads | 1, 2 only on "go for gold" (wave 1) | nothing |
 | `posting-gater` | Gates one company's roles, or up to 4 posting links: live, route, level, place, contract, fit | 6-8 (wave 1) + up to 8 (wave 2) | nothing |
+| `duplicate-guard` | Checks every candidate against the tracker, triage list, folders and mailbox; BLOCK / WARN / CLEAR with evidence | 1 per shortlist (and per single link) | nothing |
 | `approval-desk` | Checks the shortlist against the rules and the session brief; one approval card | 1 (+ shadow) | nothing |
 | `letter-writer` | Reads the posting, drafts one letter for one approved role from the team pack and the CV only | 1 per approved role | its draft and a posting copy |
 | `letter-reviewer` | Checks each letter and drafted answer against CV, years table and rules; PASS, or BLOCK items with safe fixes | 1 per letter (+ shadow) | nothing |
@@ -18,9 +19,10 @@ The main chat leads. Agents take the page-heavy, writing and checking work, so t
 main chat: handoff + rules + known list -> TEAM PACK
 wave 1   : raider (raid) + gater x 6-8 (trk.py sweep 8) + crawler x 4-6 + headhunter x 1  (one message, parallel)
 wave 2   : gater x <=8 on crawler finds, nuggets and the raider's company-site list (<=4 links each); leads -> user
+guard    : trk.py export -> duplicate-guard on every candidate -> BLOCKs off, WARNs flagged
 desk     : approval-desk on one shortlist (<=12 career-site roles + the Easy Apply list) -> card -> user's OK or brief
-lane B   : raider (submit) on the approved Easy Apply ids, max 30
-lane A   : per role: writer -> reviewer -> (one BLOCK round) -> form -> submit, roles in parallel
+lane B   : trk.py check per company -> raider (submit) on the approved Easy Apply ids, max 30
+lane A   : per role: writer -> reviewer -> (one BLOCK round) -> trk.py check -> form -> submit, roles in parallel
 main chat: tracker, log + label, report
 ```
 
@@ -51,6 +53,7 @@ CV paths must be readable by the agents too: if the Job Search folder is on anot
 | `job-crawler` | sonnet | haiku, sonnet, opus |
 | `posting-gater` | sonnet | haiku, sonnet, opus |
 | `company-researcher` | sonnet | haiku, sonnet, opus |
+| `duplicate-guard` | sonnet | haiku, sonnet |
 | `easy-apply-raider` | sonnet | sonnet, opus |
 | `headhunter` | opus | sonnet, opus |
 | `letter-writer` | sonnet | sonnet, opus |
@@ -102,6 +105,14 @@ Grounds: <your pick | the grounds for this headhunter, different from the other 
 Already covered: <the crawlers' title words, cities and boards this session>
 Budget: <pages, default 60>
 ```
+**Duplicate guard**
+```
+Team pack: <path>
+Applied: <path of the trk.py export CSV>
+Mail: <check, if this session has mail search tools | not available>
+Candidates:
+<n>. <Company> | <Title> | <City> | <route> | <link or job id>
+```
 **Approval desk**
 ```
 Team pack: <path>
@@ -135,7 +146,7 @@ Answers: <free-text answers drafted for this application | none>
 - Raider reports `NEEDS MAIN CHAT`: run its raid (or submit) procedure yourself in the user's signed-in browser, same rules and pace; say so in the report.
 - Headhunter leads go into the report's "Leads" section and under "Leads" in `handoff.md` (company, signal, source, date); they are never gated or applied to.
 - Letters: a writer's entry goes into `letters.json` under its key only after the reviewer's PASS, or after you applied the reviewer's BLOCK fixes word for word following the fix round.
-- `frontier.py log` one row per dispatch: tokens if reported, otherwise the `chars` on the agent's RUN line. Tasks: `raid:<date>`, `ea-submit:<date>`, `gate:<Company>`, `crawl:<focus>:<date>`, `hunt:<n>:<date>`, `approve:<date>`, `write:<Company>`, `review:<Company>`, shadow runs `review-shadow:<Company>` and `approve-shadow:<date>`.
+- `frontier.py log` one row per dispatch: tokens if reported, otherwise the `chars` on the agent's RUN line. Tasks: `raid:<date>`, `ea-submit:<date>`, `guard:<date>`, `gate:<Company>`, `crawl:<focus>:<date>`, `hunt:<n>:<date>`, `approve:<date>`, `write:<Company>`, `review:<Company>`, shadow runs `review-shadow:<Company>` and `approve-shadow:<date>`.
 
 ## Approvals
 - **Review mode** (default): nothing goes out before the user's one-line OK ("go", "go 1, 3").
@@ -155,6 +166,7 @@ One `frontier.py label '<json [[task, quality], …]>'` call per session. Label 
 | `headhunter` | `hunt:<n>:<date>` | (nuggets that passed the gate + leads the user kept) ÷ everything it reported; 0 if it reported nothing |
 | `easy-apply-raider` | `raid:<date>` | share of its Easy Apply list the user approved and that went out without a gate error found at submit |
 | `easy-apply-raider` | `ea-submit:<date>` | submitted ÷ approved, counting UNKNOWN stops as correct (nothing wrong was sent); 0 if a wrong answer was sent |
+| `duplicate-guard` | `guard:<date>` | 1 if no role it cleared later turns out to be a repeat (a later `trk.py check` match, the employer or the user says so) and no BLOCK is overturned; 0 otherwise |
 | `approval-desk` | `approve:<date>` | share of its recommendations the user followed. Shadow: share of its verdicts that match the governing desk's |
 | `letter-writer` | `write:<Company>` | 1 if the first draft got PASS and the user approved it without content changes; 0.5 if PASS after the fix round; 0 if BLOCK items were still open after the fix round or the user rewrote content |
 | `letter-reviewer` | `review:<Company>` | 1 if nothing it passed is later corrected by the user or caught at read-back; 0 otherwise. Shadow: 1 if it found the same BLOCK items as the governing reviewer and no false ones |

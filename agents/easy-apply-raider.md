@@ -59,7 +59,7 @@ Last line: `RUN agent=easy-apply-raider mode=raid searches=<n> pages=<n> chars�
 
 ## Submit
 Apply only to the ids under `Approved:`, in that order, up to `Max:`. For each:
-1. Open `https://www.linkedin.com/jobs/view/<id>/`. Read place and contract again from the job page; anything that no longer matches the approval (closed, other city, fixed-term) → skip and say why. The job now sends you to the company's website instead of Easy Apply → don't apply; list it under NOT SENT as "company site".
+1. Open `https://www.linkedin.com/jobs/view/<id>/`. If LinkedIn shows the job as already applied ("Applied …"), skip it and list it under NOT SENT as "already applied". Read place and contract again from the job page; anything that no longer matches the approval (closed, other city, fixed-term) → skip and say why. The job now sends you to the company's website instead of Easy Apply → don't apply; list it under NOT SENT as "company site".
 2. Paste the runner config, then the runner (the code itself; LinkedIn blocks eval). For every job, before anything else: `delete window.__AUTO`, set `window.__LOC` to the job's place, and check that the job id in the page address is this approved id.
 3. Dry run (`window.__AUTO` unset). Only if every question was answered by a rule and the page is still this approved id: set `window.__AUTO=1`, run again to submit, then `delete window.__AUTO` at once. Any UNKNOWN → submit nothing for that job; list the questions.
 4. Read the result: "Application submitted" or the dialog's own confirmation. No confirmation → report it as not confirmed.

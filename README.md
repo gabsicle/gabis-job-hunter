@@ -50,6 +50,7 @@ Every session runs as a team. Your main chat leads: it talks to you, starts the 
 | **easy-apply-raider** | Works only on LinkedIn, in your signed-in browser: finds and checks Easy Apply roles every session, hands the other LinkedIn finds to the gaters, and after your OK submits the approved Easy Apply roles one by one (max 30, nothing it can't answer from your rules) |
 | **headhunter** | Goes off-script: funding rounds, PE deals, leadership changes, search-firm mandates, niche boards. Follows trails to hidden roles and brings back a few gold nuggets, plus leads where a role is about to open (never applied to; you decide) |
 | **posting-gater** | Checks one company's careers page (or a few links from the crawlers) and gates each role: live, apply route, level, place, contract, fit |
+| **duplicate-guard** | Checks every role against everything you've applied to (tracker, dropped roles, folders, your mailbox), matching company names across legal forms and group brands. Blocks repeats before you see them; a final check runs right before every submission |
 | **approval-desk** | Checks the shortlist against your rules and the brief you gave, and hands you one card: recommended, not recommended, dropped. You approve with one line |
 | **letter-writer** | Drafts one letter per role you approved, only from your CV, in the posting's language |
 | **letter-reviewer** | Independent check of every letter and drafted answer against your CV and rules before you see it |
