@@ -22,7 +22,7 @@ Drop companies on the user's "never apply" list and any with a live process in t
 ## 3. Rank and load
 - **Fit A:** strong match on role type, industry and place. **Fit B:** plausible. Leave out the rest.
 - Waves: 1 = Fit-A corporates in the home region · 2 = Fit-B corporates · 3 = Fit-A funds and advisory firms · 4 = portfolio companies.
-- Save the full list as `Market Map.xlsx` in the `Job Search` folder (sheets per segment plus Sources), then append the rows to the tracker's **Map sweep** sheet (columns: Wave, Segment, Company, City / HQ, Owner / Fit, Careers page, ATS, Last checked, Relevant open roles, Action, Notes) with an empty "Last checked". Use a short Python script with openpyxl; back up the tracker first.
+- Save the full list as `Market Map.xlsx` in the `Job Search` folder (sheets per segment plus Sources), then append the rows to the tracker's **Map sweep** sheet (columns: Wave, Segment, Company, City / HQ, Owner / Fit, Careers page, ATS, Last checked, Relevant open roles, Action, Notes) with an empty "Last checked". Name the segment of PE and VC funds' own rows with the word "fund" (e.g. "PE fund"): job-hunt checks those monthly, because funds rarely post roles, and checks operating companies weekly. Use a short Python script with openpyxl; back up the tracker first.
 
 After loading, label each researcher run with the share of its rows you kept (fits the targets, careers URL works): `python3 _Playbook/scripts/frontier.py label '[["research:<segment>:<date>", <0-1>], …]'`.
 

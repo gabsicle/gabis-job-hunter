@@ -35,10 +35,10 @@ Open only links that are in your brief, that a search returned, or that appear o
 
 ## Procedure
 1. For each title word × city group, search the job boards: `<title words> (<city> OR <city>) site:<ATS domain>`, one query per ATS domain, posting-language variants too. If search results are thin, rephrase the query (another title variant, another city, the ATS name without `site:`).
-2. Also search public job pages that list roles at many employers: `<title words> <city> site:linkedin.com/jobs/view`, StepStone and the companies' own job boards. These only point to a role; the gaters confirm it on the company's own site. Never open signed-in pages.
-3. Open a result only when its snippet does not settle company, title, city or date.
+2. Also search other boards that list roles at many employers (StepStone, Indeed, Glassdoor, the companies' own job boards). These only point to a role; the gaters confirm it on the company's own site. LinkedIn is the easy-apply-raider's ground: skip it. Never open signed-in pages.
+3. Open a result only when its snippet does not settle company, title or city. A missing date is no reason to open or to skip: write `unknown` and let the gater check. Every result with a clear company, title and city that passes step 4 goes on your list; do not leave finds under "possible follow-up".
 4. Skip: companies on the known or exclusion list, staffing agencies (unless the brief allows them), postings older than the window, obvious other disciplines or junior titles.
-5. Stop at 25 candidates or when the queries are exhausted.
+5. Run at least 12 queries (one per ATS domain counts as one each) before you call the search thin. Stop at 25 candidates or when the queries are exhausted.
 
 ## Output (nothing else)
 One line per candidate, freshest first:
