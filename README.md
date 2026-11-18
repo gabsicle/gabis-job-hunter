@@ -42,17 +42,21 @@ When something needs you (a portal login, a human check, an e-mail to send), it 
 - **job-hunt** – the application loop: find → gate → shortlist → letter → apply → record.
 - **application-inbox** – mailbox sweep that updates the tracker and lists what you need to do.
 
-## The team (agents, new in 0.3)
-Page-heavy work runs in separate agents, so your main chat stays short and sharp and a batch can cover up to 30 companies.
+## The team (agents)
+Every session runs as a team. Your main chat leads: it talks to you, starts the agents, merges their results, fills forms, submits and keeps the tracker. The agents do the page-heavy, writing and checking work in parallel, so a batch can cover up to 30 companies.
 | Agent | What it does |
 |---|---|
-| **job-crawler** | Finds fresh postings on job boards and ATS sites by title and city, beyond your target list |
-| **posting-gater** | Checks one company's careers page and gates each role: live, apply route, level, place, contract, fit |
+| **job-crawler** | Finds fresh postings on job boards, ATS sites and public LinkedIn job pages by title and city, beyond your target list. "Search wider" means more crawlers |
+| **headhunter** | Goes off-script: funding rounds, PE deals, leadership changes, search-firm mandates, niche boards. Follows trails to hidden roles and brings back a few gold nuggets, plus leads where a role is about to open (never applied to; you decide) |
+| **posting-gater** | Checks one company's careers page (or a few links from the crawlers) and gates each role: live, apply route, level, place, contract, fit |
 | **approval-desk** | Checks the shortlist against your rules and the brief you gave, and hands you one card: recommended, not recommended, dropped. You approve with one line |
+| **letter-writer** | Drafts one letter per role you approved, only from your CV, in the posting's language |
 | **letter-reviewer** | Independent check of every letter and drafted answer against your CV and rules before you see it |
 | **company-researcher** | Researches one segment of your market map with verified careers pages and sources |
 
-Your main chat runs the team: it starts the agents, picks a model for each and merges their results. Agents only read and report. Forms, portal accounts, submissions and the tracker stay in your main chat, with you. If your Claude cannot run agents, every skill falls back to doing the work in the main chat.
+**A session:** crawlers, gaters and the headhunter run together → more gaters on their finds → approval desk → your OK → letter writers → letter reviewers → forms, submissions and tracker in your main chat.
+
+**How you see it:** the agents show up in the chat while they run, and every report opens with a team line, e.g. `Team: crawler ×3 · headhunter ×1 · gater ×18 · approval-desk ×1 · letter-writer ×2 · letter-reviewer ×2`. If it says `Team: none`, the reason follows; only a Claude without agent support runs the work in the main chat.
 
 **Approvals stay yours.** No agent can give your OK or answer a permission prompt from the Claude app. Agents avoid such prompts by opening only pages they found by search; whatever still needs you (a page to approve, a job board that needs a browser, a portal account, a human check) is collected into one list.
 
