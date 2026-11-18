@@ -10,10 +10,10 @@ The plugin ships no code. At setup, write each tool below into the user's `_Play
 - Sheet **Map sweep**: `Wave`, `Segment`, `Company`, `City / HQ`, `Owner / Fit`, `Careers page`, `ATS`, `Last checked`, `Relevant open roles`, `Action`, `Notes`.
 
 ## trk.py — read and update the tracker
-The second line of the script is exactly `# trk-spec: 2`; a `trk.py` without that line is out of date: write it again from this spec. Before any write, copy the tracker once per day to `_QA/Application Tracker_backup_<YYYY-MM-DD>.xlsx`.
+The second line of the script is exactly `# trk-spec: 3`; a `trk.py` without that line is out of date: write it again from this spec. Before any write, copy the tracker once per day to `_QA/Application Tracker_backup_<YYYY-MM-DD>.xlsx`.
 - `known` → company names in the tracker, `;`-separated (for de-duplication).
 - `list [status]` → `company | status | next step`.
-- `sweep [N]` (default 20) → the next N rows of the Map sweep sheet, empty "Last checked" first, then oldest first: `company | segment | city | careers page | ATS`, one per line.
+- `sweep [N]` (default 8) → the next N rows of the Map sweep sheet: skip rows checked in the last 7 days, and rows whose Segment contains "fund" (case-insensitive) checked in the last 30 days; then order rows whose "Relevant open roles" was not empty or 0 at the last check first, then empty "Last checked", then oldest first. Print `company | segment | city | careers page | ATS`, one per line.
 - `checked '<json [[company, relevant_open_roles, action], …]>'` → on the Map sweep rows whose Company matches exactly, sets Last checked to today, Relevant open roles and Action; prints names not found.
 - `upd '<json [[company_substring, status, next_step, note], …]>'` → updates every matching row; appends the note to Notes with ` | `; prints names not found.
 - `add '<json [{date, company, role, location, type, channel, status, salary, documents, folder, link, next_step, notes}, …]>'` → appends rows with a running `#`.
@@ -44,7 +44,8 @@ Precondition: `window.__P = <profile.json>`; otherwise return a message asking f
 - Match each empty text field by its label, aria-label, placeholder, name or id (EN/DE/ES patterns) to: first, last, full name, e-mail (also "confirm e-mail"), phone, LinkedIn, street, postcode, city, current company, current title, salary (text; number-only fields get the number), start date (text or ISO for date inputs). Set values with the native value setter and fire `input`, `change`, `blur`.
 - Store all fields in `window.__F`; return what was filled, then a numbered to-do list of every open field (label, type, required, options for selects). `window.__DRY = 1` reads only.
 
-## easy_apply_runner.js — LinkedIn Easy Apply (mode B only)
+## easy_apply_runner.js — LinkedIn Easy Apply (lane B)
+The second line of the script is exactly `// runner-spec: 2`; a runner without that line is out of date: write it again from this spec.
 Precondition: `window.__JH` from runner_config.js; LinkedIn signed in as the user; `window.__LOC` = job location read from the job page. Defines `window.__ea()`.
 1. If no application dialog is open, click the Easy Apply button; if none, return the page's status ("Applied…", "No longer accepting applications", "Apply on company website").
 2. Loop up to 14 dialog pages. On each page: select the résumé whose file name matches the resume regex (stop if none); fill the location autocomplete with the city and pick the matching option; then answer every field:
@@ -58,12 +59,13 @@ Precondition: `window.__JH` from runner_config.js; LinkedIn signed in as the use
    - A saved value that no rule supports → UNKNOWN (saved answers count only for contact fields).
 3. Any UNKNOWN on a page → stop and return the list; nothing is sent.
 4. On the review page untick "Follow company". Without `window.__AUTO = 1` return "READY (not submitted)". With it, click Submit, wait, and return SUBMITTED only when the confirmation text appears.
-5. Return a log `question = answer ; …` for the tracker notes. Output stays under about 1,000 characters.
+5. Every call ends with `delete window.__AUTO`, whatever happened, so the next job always starts with a dry run.
+6. Return a log `question = answer ; …` for the tracker notes. Output stays under about 1,000 characters.
 
 ## frontier.py — which model each agent runs on
-`python3 frontier.py <command> [--file PATH]`; default file `_Playbook/model_runs.csv` (relative to the Job Search folder). The second line of the script is exactly `# frontier-spec: 3`; a `frontier.py` without that line is out of date: write it again from this spec and keep `model_runs.csv`. CSV columns: `date, agent, model, task, tokens, chars, cost_units, quality`. Write the CSV through a temp file in the same folder and rename it (keep normal read permissions).
+`python3 frontier.py <command> [--file PATH]`; default file `_Playbook/model_runs.csv` (relative to the Job Search folder). The second line of the script is exactly `# frontier-spec: 4`; a `frontier.py` without that line is out of date: write it again from this spec and keep `model_runs.csv`. CSV columns: `date, agent, model, task, tokens, chars, cost_units, quality`. Write the CSV through a temp file in the same folder and rename it (keep normal read permissions).
 - Models, cheapest first: `haiku, sonnet, opus` (normalise any model name containing one of these words; skip a row whose model contains none of them and say so). Price weights (relative cost per token) default `{"haiku": 1, "sonnet": 3, "opus": 5}`; `model_prices.json` in the same folder as the log file, if present, overrides individual weights.
-- Agents (default model · allowed models · quality floor): `job-crawler` sonnet · all · 0.30 — `posting-gater` sonnet · all · 0.85 — `company-researcher` sonnet · all · 0.70 — `headhunter` opus · sonnet, opus · 0.20 — `letter-writer` sonnet · sonnet, opus · 0.80 — `letter-reviewer` opus · sonnet, opus · 0.95 — `approval-desk` opus · sonnet, opus · 0.95. Unknown agent → exit with the list (`log` skips such a row and says so).
+- Agents (default model · allowed models · quality floor): `job-crawler` sonnet · all · 0.30 — `posting-gater` sonnet · all · 0.85 — `company-researcher` sonnet · all · 0.70 — `easy-apply-raider` sonnet · sonnet, opus · 0.85 — `headhunter` opus · sonnet, opus · 0.20 — `letter-writer` sonnet · sonnet, opus · 0.80 — `letter-reviewer` opus · sonnet, opus · 0.95 — `approval-desk` opus · sonnet, opus · 0.95. Unknown agent → exit with the list (`log` skips such a row and says so).
 - Constants: MIN_N 5 labeled runs before a model can replace the default; SHRINK_K 5; TOLERANCE 0.03; EVERY 10 (5 while the probe model has fewer than MIN_N labels).
 - Per agent and model: runs, labeled n, mean cost_units, raw mean quality, sd (risk: sample standard deviation, 0 when n < 2), lower bound = raw mean − sd/√n. Shrunk quality, only for models with at least one label (else none, shown as `-`) = (sum of labels + SHRINK_K × pooled mean of all the agent's labels) ÷ (n + SHRINK_K).
 - Efficient frontier: among the agent's allowed models with ≥ MIN_N labels and a known mean cost, those no other such model dominates (mean cost ≤ and shrunk quality ≥, one strictly).

@@ -15,5 +15,8 @@ Live on the company's own site · real apply route and class: OPEN (guest form) 
 ## Approval check
 Before showing the shortlist, run the approval desk's checks yourself (`agents/approval-desk.md`): rules, evidence, brief; GO only under a brief the user typed in this session.
 
+## Easy Apply
+Run `references/easy-apply.md` yourself in the user's signed-in browser: raid, put the list on the card, submit only approved ids.
+
 ## Letters
 Write each letter per `letters.md`, then review it yourself against the letter reviewer's checks (`agents/letter-reviewer.md`) in a separate pass, quoting the source for every claim.

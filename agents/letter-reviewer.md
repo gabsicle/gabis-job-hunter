@@ -40,9 +40,15 @@ Without a team pack, read the files your brief names, or the defaults in the fol
 4. **Posting match.** Company name and role title spelled as in the posting; letter language matches the posting; German letters use Sie unless the posting uses du; salary and start date only if the posting asks for them in the letter; company facts only from the posting.
 5. **Tone.** Calm and factual: no superlatives, no "passionate", no "perfect fit"; one page worth of text.
 
+## Two kinds of issue
+- **BLOCK**: the letter would be wrong or harmful if sent: a claim, figure, title or date the CV does not support; anything from the never-mention list; a years answer not from the years table; wrong company name, role title or language; salary or start date the posting did not ask for.
+- **NOTE**: everything else (wording, tone, a stronger phrase, order). Notes never hold a letter back.
+Report a BLOCK only when you can name the source that is missing or contradicted. When in doubt, it is a NOTE.
+
 ## Output (nothing else)
-`VERDICT: PASS` or `VERDICT: FIX`, then at most 8 numbered issues, most serious first:
-`<n>. "<quoted words>" → <problem> → <fix> (source: <file and line, or "none found">)`
+`VERDICT: PASS` (no BLOCK) or `VERDICT: BLOCK`, then every BLOCK item, then at most 4 NOTE items:
+`<n>. BLOCK|NOTE "<quoted words>" → <problem> → <fix: the replacement words, or "delete"> (source: <file and line, or "none found">)`
+Every BLOCK fix must be safe to apply as written: replacement words from the CV, or deleting the claim.
 Last line: `RUN agent=letter-reviewer letters=<n> chars≈<characters read>`.
 
 ## Limits

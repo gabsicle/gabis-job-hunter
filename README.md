@@ -1,6 +1,6 @@
 # Gabis Job Hunter
 
-An application engine for Claude. It finds matching roles (company career sites first, LinkedIn Easy Apply only when you ask), writes calm, true one-page cover letters from your CV, fills and submits applications after your OK, and keeps a tracker plus one folder per application. Built by Gabi from his own job search.
+An application engine for Claude. It finds matching roles on company career sites and LinkedIn (two lanes every session: tailored career-site applications and LinkedIn Easy Apply), writes calm, true one-page cover letters from your CV, fills and submits applications after your OK, and keeps a tracker plus one folder per application. Built by Gabi from his own job search.
 
 ## What you need
 - The **Claude desktop app** with a folder on your computer connected (your "Job Search" folder).
@@ -47,6 +47,7 @@ Every session runs as a team. Your main chat leads: it talks to you, starts the 
 | Agent | What it does |
 |---|---|
 | **job-crawler** | Finds fresh postings on job boards, ATS sites and public LinkedIn job pages by title and city, beyond your target list. "Search wider" means more crawlers |
+| **easy-apply-raider** | Works only on LinkedIn, in your signed-in browser: finds and checks Easy Apply roles every session, hands the other LinkedIn finds to the gaters, and after your OK submits the approved Easy Apply roles one by one (max 30, nothing it can't answer from your rules) |
 | **headhunter** | Goes off-script: funding rounds, PE deals, leadership changes, search-firm mandates, niche boards. Follows trails to hidden roles and brings back a few gold nuggets, plus leads where a role is about to open (never applied to; you decide) |
 | **posting-gater** | Checks one company's careers page (or a few links from the crawlers) and gates each role: live, apply route, level, place, contract, fit |
 | **approval-desk** | Checks the shortlist against your rules and the brief you gave, and hands you one card: recommended, not recommended, dropped. You approve with one line |
@@ -54,9 +55,9 @@ Every session runs as a team. Your main chat leads: it talks to you, starts the 
 | **letter-reviewer** | Independent check of every letter and drafted answer against your CV and rules before you see it |
 | **company-researcher** | Researches one segment of your market map with verified careers pages and sources |
 
-**A session:** crawlers, gaters and the headhunter run together → more gaters on their finds → approval desk → your OK → letter writers → letter reviewers → forms, submissions and tracker in your main chat.
+**A session:** the LinkedIn raider, crawlers, gaters and the headhunter run together → more gaters on their finds → approval desk → your OK → letter writers → letter reviewers → forms, submissions and tracker in your main chat.
 
-**How you see it:** the agents show up in the chat while they run, and every report opens with a team line, e.g. `Team: crawler ×3 · headhunter ×1 · gater ×18 · approval-desk ×1 · letter-writer ×2 · letter-reviewer ×2`. If it says `Team: none`, the reason follows; only a Claude without agent support runs the work in the main chat.
+**How you see it:** the agents show up in the chat while they run, and every report opens with a team line, e.g. `Team: raider ×2 · crawler ×5 · headhunter ×1 · gater ×14 · approval-desk ×1 · letter-writer ×2 · letter-reviewer ×2`. If it says `Team: none`, the reason follows; only a Claude without agent support runs the work in the main chat.
 
 **Approvals stay yours.** No agent can give your OK or answer a permission prompt from the Claude app. Agents avoid such prompts by opening only pages they found by search; whatever still needs you (a page to approve, a job board that needs a browser, a portal account, a human check) is collected into one list.
 
@@ -67,11 +68,11 @@ Every session runs as a team. Your main chat leads: it talks to you, starts the 
 
 ## Where your data goes
 - **Stays on your computer:** CV, profile, answer bank, tracker, letters and application folders, all in your Job Search folder.
-- **Sent only where you approve:** your application details and documents go to the employer career sites and hiring portals (Workday, Personio, Greenhouse, SmartRecruiters, …) and, only if you ask for Easy Apply, LinkedIn, for the applications you OK in chat. E-mails go out only with your approval of the exact text.
+- **Sent only where you approve:** your application details and documents go to the employer career sites and hiring portals (Workday, Personio, Greenhouse, SmartRecruiters, …) and LinkedIn Easy Apply, for the applications you OK in chat. You can switch the Easy Apply lane off for a session ("career sites only"). E-mails go out only with your approval of the exact text.
 - **Nothing else:** no server of the author, no analytics, no tracking. Details: [PRIVACY.md](PRIVACY.md).
 
 ## Tips
 - Start in a fresh chat for each batch; say "continue applying" and it picks up from the hand-off note.
 - Check the first five letters and answers closely; correct anything once and it is saved for next time.
-- Easy Apply is for volume only. Career-site applications with a tailored letter get far better replies.
+- Easy Apply brings volume; career-site applications with a tailored letter get more replies per application. Running both is the default.
 
