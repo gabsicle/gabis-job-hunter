@@ -11,6 +11,7 @@ Re-apply rules from the owner and a guardrail audit.
 - Forms get only the profile fields they ask for, deleted after read-back. E-mails go out only after the user approves the exact text.
 - Evidence: years questions only from whole-word years-table matches; uncovered fields are UNKNOWN; every non-contact career-site answer goes to the reviewer; doubt about evidence is a BLOCK.
 - LinkedIn terms notice at setup and in the README.
+- Fix: plugin description shortened to under 500 characters (the app refused the longer one).
 
 ## 0.5.0 – 19 Nov 2026
 Two lanes every session, a LinkedIn agent, a duplicate filter and a faster letter path, from the first live agent sessions.

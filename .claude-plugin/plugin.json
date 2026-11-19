@@ -1,7 +1,7 @@
 {
   "name": "gabis-job-hunter",
   "version": "0.6.0",
-  "description": "Gabis Job Hunter: finds matching roles on company career sites and LinkedIn, writes calm, true one-page cover letters, applies after your approval (career sites and LinkedIn Easy Apply), and keeps a tracker plus one folder per application. Every session runs as an agent team: a LinkedIn Easy Apply raider, job crawlers, an off-script headhunter and posting gaters in parallel, a duplicate guard so you never apply twice, an approval desk, letter writers and an independent letter reviewer, on models chosen by a cost-quality frontier. Set up once from your CV, then say \"find me jobs\".",
+  "description": "Runs your job search as an agent team: finds roles on company career sites and LinkedIn, checks each one, writes true one-page cover letters, applies (career sites and Easy Apply) only after your OK, never twice to the same role, and keeps a tracker plus one folder per application. Set up once from your CV, then say \"find me jobs\".",
   "author": {
     "name": "gabsicle",
     "url": "https://github.com/gabsicle"
