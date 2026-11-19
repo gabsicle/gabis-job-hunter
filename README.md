@@ -42,30 +42,11 @@ When something needs you (a portal login, a human check, an e-mail to send), it 
 - **job-hunt** – the application loop: find → gate → shortlist → letter → apply → record.
 - **application-inbox** – mailbox sweep that updates the tracker and lists what you need to do.
 
-## The team (agents)
-Every session runs as a team. Your main chat leads: it talks to you, starts the agents, merges their results, fills forms, submits and keeps the tracker. The agents do the page-heavy, writing and checking work in parallel, so a batch can cover up to 30 companies.
-| Agent | What it does |
-|---|---|
-| **job-crawler** | Finds fresh postings on job boards, ATS sites and public LinkedIn job pages by title and city, beyond your target list. "Search wider" means more crawlers |
-| **easy-apply-raider** | Works only on LinkedIn, in your signed-in browser: finds and checks Easy Apply roles every session, hands the other LinkedIn finds to the gaters, and after your OK submits the approved Easy Apply roles one by one (max 30, nothing it can't answer from your rules) |
-| **headhunter** | Goes off-script: funding rounds, PE deals, leadership changes, search-firm mandates, niche boards. Follows trails to hidden roles and brings back a few gold nuggets, plus leads where a role is about to open (never applied to; you decide) |
-| **posting-gater** | Checks one company's careers page (or a few links from the crawlers) and gates each role: live, apply route, level, place, contract, fit |
-| **duplicate-guard** | Checks every role against everything you've applied to (tracker, dropped roles, folders, your mailbox), matching company names across legal forms and group brands. Blocks repeats before you see them; a final check runs right before every submission |
-| **approval-desk** | Checks the shortlist against your rules and the brief you gave, and hands you one card: recommended, not recommended, dropped. You approve with one line |
-| **letter-writer** | Drafts one letter per role you approved, only from your CV, in the posting's language |
-| **letter-reviewer** | Independent check of every letter and drafted answer against your CV and rules before you see it |
-| **company-researcher** | Researches one segment of your market map with verified careers pages and sources |
-
-**A session:** the LinkedIn raider, crawlers, gaters and the headhunter run together → more gaters on their finds → approval desk → your OK → letter writers → letter reviewers → forms, submissions and tracker in your main chat.
-
-**How you see it:** the agents show up in the chat while they run, and every report opens with a team line, e.g. `Team: raider ×2 · crawler ×5 · headhunter ×1 · gater ×14 · approval-desk ×1 · letter-writer ×2 · letter-reviewer ×2`. If it says `Team: none`, the reason follows; only a Claude without agent support runs the work in the main chat.
-
-**Approvals stay yours.** No agent can give your OK or answer a permission prompt from the Claude app. Agents avoid such prompts by opening only pages they found by search; whatever still needs you (a page to approve, a job board that needs a browser, a portal account, a human check) is collected into one list.
-
-**Model frontier.** Each agent runs on the cheapest model that holds quality. A small script Claude writes at setup (`frontier.py`) logs every agent run (cost) and what happened next (quality: did the gate hold, did the letter need a fix), plots cost against quality per agent, and picks from the efficient frontier, Markowitz-style, with a few low-risk test runs on cheaper models. The letter reviewer and the approval desk only test cheaper models in parallel with the main one, so a weaker check never decides. Open `Model Frontier.html` in your folder to see the chart.
+## Free and Pro
+This free plugin runs the whole loop in your main chat, career sites and LinkedIn Easy Apply included, and starts no agents. Since 0.6.0 the agent team (parallel crawlers, gaters, approval desk, letter writers and reviewer), the headhunter and the LinkedIn raider are part of Gabis Job Hunter Pro and are not in this plugin. Versions up to 0.5.0, which include them, stay available in this repository's history under the MIT licence.
 
 ## Your files (all in your folder, nothing leaves it except what you apply with)
-`Application Tracker.xlsx` (Applications, Summary, Map sweep) · `Applications/YYYY-MM-DD Company - Role (City)/` · `_Playbook/` with your profile, answer bank, rules, hand-off note, the agent run log (`model_runs.csv`) and small scripts Claude writes for you at setup (letters, tracker, folders, packs, form autofill, Easy Apply runner, model frontier) · `Model Frontier.html`. The plugin itself contains only instructions and templates, no code.
+`Application Tracker.xlsx` (Applications, Summary, Map sweep) · `Applications/YYYY-MM-DD Company - Role (City)/` · `_Playbook/` with your profile, answer bank, rules, hand-off note and small scripts Claude writes for you at setup (letters, tracker, folders, packs, form autofill, Easy Apply runner). The plugin itself contains only instructions and templates, no code.
 
 ## Where your data goes
 - **Stays on your computer:** CV, profile, answer bank, tracker, letters and application folders, all in your Job Search folder.
