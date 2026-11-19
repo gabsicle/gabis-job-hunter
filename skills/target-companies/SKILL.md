@@ -9,8 +9,6 @@ description: Builds and maintains the user's target-company map for Gabis Job Hu
 Read `_Playbook/handoff.md`, `_Playbook/rules.md` and the targets in `_candidate_profile.md` (titles, industries, company types, cities, commute radius, remote). Ask only what is missing, in one AskUserQuestion round.
 
 ## 2. Research
-**With the team:** split the research by segment (corporates · PE funds and their portfolio companies · advisory firms and start-ups; a large region also by city cluster). Get the models with `python3 _Playbook/scripts/frontier.py pick company-researcher --n <segments>` (if it cannot run, use sonnet and dispatch anyway) and start one `company-researcher` per segment in one message, each with its slot's model. If `gabis-job-hunter:company-researcher` is not in your agent list, start `general-purpose` agents with the body of the plugin's `agents/company-researcher.md` above each brief. Brief: segment, cities and radius, industries, company types, exclusions (never-apply list, live processes, written out), target count. Agents cannot start other agents, so start each one from this chat. Merge their rows: de-duplicate by company, drop exclusions, keep only rows with a source link, and log each run (`frontier.py log`, task `research:<segment>:<date>`). Pages listed as `NEEDS APPROVAL` go to the user once, at the end. Research inline as below only with no Agent tool at all, or after two failed dispatches in a row, and say so once.
-
 Look things up; do not list companies from memory alone. Use web search and the companies' own sites:
 - **Corporates:** largest employers in the user's cities and industries (company lists, regional rankings, stock-index members, family-owned leaders).
 - **Private equity:** funds active in the user's country and ticket size; then their current portfolio companies near the user (fund websites' portfolio pages).
@@ -23,8 +21,6 @@ Drop companies on the user's "never apply" list and any with a live process in t
 - **Fit A:** strong match on role type, industry and place. **Fit B:** plausible. Leave out the rest.
 - Waves: 1 = Fit-A corporates in the home region · 2 = Fit-B corporates · 3 = Fit-A funds and advisory firms · 4 = portfolio companies.
 - Save the full list as `Market Map.xlsx` in the `Job Search` folder (sheets per segment plus Sources), then append the rows to the tracker's **Map sweep** sheet (columns: Wave, Segment, Company, City / HQ, Owner / Fit, Careers page, ATS, Last checked, Relevant open roles, Action, Notes) with an empty "Last checked". Name the segment of PE and VC funds' own rows with the word "fund" (e.g. "PE fund"): job-hunt checks those monthly, because funds rarely post roles, and checks operating companies weekly. Use a short Python script with openpyxl; back up the tracker first.
-
-After loading, label each researcher run with the share of its rows you kept (fits the targets, careers URL works): `python3 _Playbook/scripts/frontier.py label '[["research:<segment>:<date>", <0-1>], …]'`.
 
 ## 4. Hand over
 Tell the user how many companies landed in each wave and the top ten Fit-A names; job-hunt sweeps them 15–20 per session, oldest "Last checked" first, and re-checks every 7–10 days. Update `handoff.md` with the map's date and wave counts.

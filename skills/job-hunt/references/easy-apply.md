@@ -1,11 +1,11 @@
 # LinkedIn Easy Apply (lane B, every session)
 
-The `easy-apply-raider` agent runs this lane (`agents/easy-apply-raider.md`): a raid in wave 1, a submit run after approval. When it reports `NEEDS MAIN CHAT`, the main chat follows the same steps itself. Use only a browser where LinkedIn is signed in as **the user** (check the name in the header). Never call LinkedIn's internal or guest APIs (`/voyager/`, `/jobs-guest/`); they are blocked for scripts and agents. Open LinkedIn pages normally.
+The main chat runs this lane: a raid while finding, a submit run after approval. Use only a browser where LinkedIn is signed in as **the user** (check the name in the header). Never call LinkedIn's internal or guest APIs (`/voyager/`, `/jobs-guest/`); they are blocked for scripts and agents. Open LinkedIn pages normally.
 
 ## Find (raid)
 - Normal job search page, one title × place at a time: `https://www.linkedin.com/jobs/search/?keywords=<title>&location=<place>&f_TPR=r604800`, plus an Easy Apply-only pass with `&f_AL=true`. Read the result list as page text.
 - Open each candidate's job page and gate it: place and on-site days, contract type, level, years asked, pay if stated, company not known and not on the do-not-gate list. One role per company.
-- Easy Apply roles go on the EASY APPLY list; "Apply on company website" roles go to the gaters (lane A).
+- Easy Apply roles go on the EASY APPLY list; "Apply on company website" roles are gated like any other career-site role (lane A).
 - Pace: one page at a time, a few seconds apart, no parallel tabs. Stop at any CAPTCHA, security check or limit message.
 
 ## Résumé

@@ -1,6 +1,6 @@
 # Letters
 
-`letter-writer` agents draft from these rules (one per approved role), `letter-reviewer` agents check each draft, and the main chat merges the PASS entries into `letters.json` and renders them.
+Write each letter from these rules, review it in a separate pass (job-hunt, step 7), then merge it into `letters.json` and render it.
 
 ## Tone and structure
 - One page, the posting's language, calm and factual ("chill"): no superlatives, no "passionate", no "I am the perfect fit".

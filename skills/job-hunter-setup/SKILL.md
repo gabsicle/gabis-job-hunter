@@ -48,13 +48,11 @@ Use the templates in `references/`:
 - Tracker: `python3 _Playbook/scripts/build_tracker.py "Application Tracker.xlsx"` (creates Applications, Summary and Map sweep sheets).
 - `handoff.md`: date of setup, targets, "last inbox sweep: never", empty lists for live processes and items waiting on the user.
 - Easy Apply config: `python3 _Playbook/scripts/runner_config.py _Playbook/profile.json _Playbook/runner_config.js`.
-- Model frontier: `frontier.py` (written in step 1 with the other scripts) starts `_Playbook/model_runs.csv` on first use. Optional `_Playbook/model_prices.json` with relative price weights (default `{"haiku": 1, "sonnet": 3, "opus": 5}`).
 
 ## 5. Confirm and hand over
 1. Show a short summary: targets, places, pay phrase, start date, boundaries, the years table and the stories. Ask the user to correct or OK it; mark confirmed answer-bank entries "OK".
 2. Tell them what to say next: "build my target company list" (target-companies), "find me jobs" (job-hunt), "any news on my applications?" (application-inbox).
-3. Mention once, in one sentence, that Job Hunter works as an agent team: crawlers and gaters find and check roles in parallel, a LinkedIn raider handles Easy Apply, a headhunter goes off-script for hidden roles, an approval desk turns the shortlist into one card to OK, letter writers draft and an independent reviewer checks every letter, and each agent runs on the cheapest model that holds quality, learned from results.
-4. Mention once that a mail connector (Gmail or Outlook) lets Job Hunter check for duplicates and replies, and that Claude in Chrome is needed for career-site forms with file uploads.
-5. Offer a daily job feed: a weekday scheduled task that sweeps the inbox and the next Map sweep companies and leaves a shortlist (it never submits on its own). Create it only if the user says yes, at the time they choose.
+3. Mention once that a mail connector (Gmail or Outlook) lets Job Hunter check for duplicates and replies, and that Claude in Chrome is needed for career-site forms with file uploads.
+4. Offer a daily job feed: a weekday scheduled task that sweeps the inbox and the next Map sweep companies and leaves a shortlist (it never submits on its own). Create it only if the user says yes, at the time they choose.
 
 Re-running setup later updates the profile: read the existing files first and change only what the user changes.
