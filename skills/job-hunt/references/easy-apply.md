@@ -12,6 +12,7 @@ The `easy-apply-raider` agent runs this lane (`agents/easy-apply-raider.md`): a 
 The user uploads their current CV once to the LinkedIn résumé library (`linkedin.com/jobs/application-settings`). The runner selects it by the file pattern in `runner_config.js`. No match → nothing is sent and the user is asked to upload it.
 
 ## Submit (approved ids only)
+Needs `_Playbook/runner_config.js` (written by `runner_config.py` from `profile.json`) and `_Playbook/scripts/easy_apply_runner.js`; job-hunt's start re-creates both when missing or out of date.
 1. Open `https://www.linkedin.com/jobs/view/<id>/`. Check place and contract on the job page again.
 2. Paste `_Playbook/runner_config.js`, then `_Playbook/scripts/easy_apply_runner.js` (the code itself; LinkedIn blocks eval). For every job: `delete window.__AUTO`, set `window.__LOC` to the job's place, and check the job id in the page address is the approved id.
 3. Dry run with `window.__AUTO` unset: fills and stops at the review page ("READY"). Every question answered by a rule → set `window.__AUTO=1`, run again to submit, and `delete window.__AUTO` straight after. Any UNKNOWN → nothing is sent; the questions go to the question queue. A job that now sends you to the company's website is not applied to here.

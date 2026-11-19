@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.6.1 – 19 Nov 2026
+- job-hunt's start writes `runner_config.js` from `profile.json` when it is missing or older than the profile, so the Easy Apply lane can submit in folders set up before v0.5.0.
+
 ## 0.6.0 – 19 Nov 2026
 Re-apply rules from the owner and a guardrail audit.
 - Re-apply rules: the same role at the same company is never applied to again, from any source (reworded titles, short forms and translations count as the same role); a different role at the same company only after 30 days; within 30 days only if clearly more interesting, and only with the user's yes. `trk.py` 5 `check` gives BLOCK / ASK / OK with the earlier role and date; excluded companies always BLOCK. duplicate-guard adds ASK and becomes read-only (mail hits come from the main chat).

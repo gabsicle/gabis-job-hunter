@@ -1,6 +1,6 @@
 {
   "name": "gabis-job-hunter",
-  "version": "0.6.0",
+  "version": "0.6.1",
   "description": "Runs your job search as an agent team: finds roles on company career sites and LinkedIn, checks each one, writes true one-page cover letters, applies (career sites and Easy Apply) only after your OK, never twice to the same role, and keeps a tracker plus one folder per application. Set up once from your CV, then say \"find me jobs\".",
   "author": {
     "name": "gabsicle",
