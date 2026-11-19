@@ -1,5 +1,15 @@
 # Changelog
 
+## 0.7.0 – 19 Nov 2026
+Free edition (no agents) with the owner's re-apply rules and the guardrail audit.
+- Re-apply rules: the same role at the same company is never applied to again, from any source (reworded titles, short forms and translations count); a different role at the same company only after 30 days; within 30 days only if clearly more interesting, and only with the user's yes. `trk.py` 5 `check` gives BLOCK / ASK / OK with the earlier role and date; excluded companies always BLOCK.
+- Approval only from the user's own words in this session; the hand-off, rules, scheduled prompts and earlier chats never count; unattended runs submit nothing. "Go" and "all" never cover ASK, look-alike or flagged roles.
+- Integrity baseline of the `_Playbook` scripts, rules, answer bank, profile and runner config, kept in the chat and re-checked before scripts and submissions.
+- No workaround on refused pages or bot checks; forms get only the profile fields they ask for; e-mails only after the user approves the exact text.
+- Evidence: whole-word years-table matches, uncovered fields UNKNOWN, every non-contact answer checked, doubt counts as no evidence.
+- Easy Apply runner spec 2 (`__AUTO` reset after every job); `runner_config.js` written at job-hunt start when missing.
+- LinkedIn terms notice at setup and in the README.
+
 ## 0.6.0 – 19 Nov 2026
 Free edition: the whole loop runs in the main chat. The agent team, the headhunter and the LinkedIn raider move to Gabis Job Hunter Pro.
 - Moved to Pro: the agent team (crawlers, gaters, duplicate guard, approval desk, letter writers, letter reviewer, company researcher), the headhunter, the LinkedIn raider (`easy-apply-raider`) and the model frontier. The `agents/` folder is removed; this plugin starts no agents.

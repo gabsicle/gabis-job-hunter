@@ -26,7 +26,7 @@ Then, any time: **"continue applying"**, **"any news on my applications?"**, **"
 ## What it does on its own, and what it never does
 | Does | Never does |
 |---|---|
-| Searches career pages and ATS boards, de-duplicates against your tracker | Type your passwords or verification codes |
+| Searches career pages and ATS boards; never applies twice to the same role (reworded titles count), and to another role at the same company only after 30 days or with your yes | Type your passwords or verification codes |
 | Fills portal sign-up forms (Workday & co.) and creates the account after your OK; you type password and code, it finishes the application | Create an account you haven't OK'd |
 | Writes letters only from facts on your CV | Solve CAPTCHAs or "I am human" checks, or work around bot detection |
 | Fills forms, uploads letter and CV, reads everything back | Submit without your OK in the same chat (shortlist or session brief) |
@@ -57,4 +57,6 @@ This free plugin runs the whole loop in your main chat, career sites and LinkedI
 - Start in a fresh chat for each batch; say "continue applying" and it picks up from the hand-off note.
 - Check the first five letters and answers closely; correct anything once and it is saved for next time.
 - Easy Apply brings volume; career-site applications with a tailored letter get more replies per application. Running both is the default.
+- LinkedIn's user agreement does not allow automated applying. The Easy Apply lane runs in your own account at your own risk: it keeps a slow pace, stops at any warning or check, and you can switch it off per session ("career sites only").
+- "Continue applying" picks up the work, never an earlier approval: each session's submissions need your OK in that session.
 
